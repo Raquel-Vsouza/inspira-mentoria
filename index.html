@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inspira — Mentoria e Conexão com o Mercado</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="screen">
+  <!-- Painel esquerdo -->
+  <div class="panel-left" id="panelLeft">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 34 34" fill="none">
+        <path d="M17 3L30 26H4L17 3Z" stroke="#E0B84A" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M17 3V26" stroke="#E0B84A" stroke-width="1.2" opacity="0.6"/>
+        <circle cx="17" cy="3" r="1.6" fill="#E0B84A"/>
+      </svg>
+      <span class="brand-name">Insp<em>ira</em></span>
+    </div>
+
+    <div class="hero-copy">
+      <p class="eyebrow">Conexão Universidade & Mercado</p>
+      <h1>Acelere sua carreira com quem já chegou lá.</h1>
+      <p>Conectamos estudantes universitários a profissionais e empresários de destaque para mentorias práticas e orientação real de mercado.</p>
+    </div>
+
+    <div class="card-stage" id="cardStage">
+      <div class="blob blob-a"></div>
+      <div class="blob blob-b"></div>
+      <div class="id-card" id="idCard">
+        <div class="id-top-row id-card-top">
+          <span class="id-tag">Passe Profissional</span>
+          <svg class="id-mark" viewBox="0 0 34 34" fill="none">
+            <path d="M17 3L30 26H4L17 3Z" stroke="#E0B84A" stroke-width="1.8" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="id-body">
+          <div class="id-avatar">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#C7CCEA" stroke-width="1.6"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7" stroke="#C7CCEA" stroke-width="1.6"/></svg>
+          </div>
+          <div class="id-info">
+            <p class="id-name">Seu nome aqui</p>
+            <div class="id-row">
+              <div>
+                <p class="id-field-label">Universidade</p>
+                <p class="id-field-value">a preencher</p>
+              </div>
+              <div>
+                <p class="id-field-label">Foco / Curso</p>
+                <p class="id-field-value">a preencher</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="id-divider">
+        <div class="id-bottom">
+          <div class="id-bars">
+            <span style="height:6px;"></span><span style="height:10px;"></span>
+            <span style="height:14px;"></span><span style="height:8px;"></span>
+            <span style="height:12px;"></span>
+          </div>
+          <div class="id-status"><i></i> mentorias ativas</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="privacy-note">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 5v6c0 5 3.4 9 8 11 4.6-2 8-6 8-11V5l-8-3Z" stroke="#9EA4C8" stroke-width="1.5"/></svg>
+      <span>Seus dados são protegidos conforme a LGPD. Plataforma integrada para universidades, instituições de ensino e empresas parceiras.</span>
+    </div>
+  </div>
+
+  <!-- Painel direito -->
+  <div class="panel-right">
+    <div class="form-wrap">
+
+      <!-- Login -->
+      <div class="form-panel active" id="panelLogin">
+        <h2 class="title">Bem-vindo de volta</h2>
+        <p class="subtitle">Acesse sua conta para gerenciar mentorias e conectar-se com profissionais.</p>
+
+        <div class="field">
+          <label for="loginEmail">E-mail</label>
+          <input type="email" id="loginEmail" placeholder="seuemail@exemplo.com">
+        </div>
+
+        <div class="field">
+          <label for="loginPass">Senha</label>
+          <div class="input-wrap">
+            <input type="password" id="loginPass" placeholder="••••••••">
+            <button type="button" class="toggle-pass" data-target="loginPass" title="Mostrar/ocultar senha">
+              <svg class="eye-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="row-between">
+          <a class="link-muted" id="goForgot">Esqueci minha senha</a>
+        </div>
+
+        <button class="btn-primary" type="button">Entrar na plataforma</button>
+
+        <p class="switch-line">Ainda não faz parte? <a id="goSignup">Criar conta gratuita</a></p>
+      </div>
+
+      <!-- Cadastro -->
+      <div class="form-panel" id="panelSignup">
+        <h2 class="title">Junte-se ao ecossistema</h2>
+        <p class="subtitle">Inicie sua jornada de mentoria com líderes e especialistas do mercado.</p>
+
+        <div class="field">
+          <label for="signupName">Nome completo</label>
+          <input type="text" id="signupName" placeholder="Como você deseja ser chamado">
+          <p class="help-text" id="nameHelp">Informe seu nome e sobrenome.</p>
+        </div>
+
+        <div class="field-grid">
+          <div class="field">
+            <label for="signupUni">Universidade / Instituição</label>
+            <input type="text" id="signupUni" placeholder="Ex: USP / FIAP">
+          </div>
+          <div class="field">
+            <label for="signupCurso">Curso</label>
+            <input type="text" id="signupCurso" placeholder="Ex: Engenharia">
+          </div>
+        </div>
+
+        <div class="field-grid">
+          <div class="field">
+            <label for="signupEmail">E-mail</label>
+            <input type="email" id="signupEmail" placeholder="seuemail@exemplo.com">
+          </div>
+          <div class="field">
+            <label for="signupPhone">WhatsApp</label>
+            <input type="tel" id="signupPhone" placeholder="(11) 91234-5678">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="signupPass">Senha</label>
+          <div class="input-wrap">
+            <input type="password" id="signupPass" placeholder="Crie uma senha segura">
+            <button type="button" class="toggle-pass" data-target="signupPass" title="Mostrar/ocultar senha">
+              <svg class="eye-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </div>
+          <p class="help-text" id="passHelp">A senha deve ter 8 dígitos, contendo pelo menos um número e uma letra maiúscula.</p>
+        </div>
+
+        <button class="btn-primary" id="signupSubmit" type="button">Cadastrar e começar</button>
+
+        <p class="switch-line">Já possui cadastro? <a id="goLogin">Entrar</a></p>
+      </div>
+
+      <!-- Multifator via WhatsApp (MFA) -->
+      <div class="form-panel" id="panelMFA">
+        <h2 class="title">Verifique seu WhatsApp</h2>
+        <p class="subtitle">Enviamos um código de 6 dígitos para o número <strong id="displayPhone"></strong>. Insira-o abaixo para concluir o cadastro.</p>
+
+        <div class="field">
+          <label for="mfaCode">Código de verificação</label>
+          <input type="text" id="mfaCode" placeholder="000000" maxlength="6" style="text-align: center; letter-spacing: 6px; font-size: 18px; font-weight: bold;">
+        </div>
+
+        <button class="btn-primary" id="mfaSubmit" type="button">Validar código</button>
+
+        <p class="switch-line">Não recebeu? <a id="resendCode">Reenviar código</a></p>
+        <p class="switch-line" style="margin-top: 10px;"><a id="goBackSignup">Voltar e corrigir número</a></p>
+      </div>
+
+      <!-- Esqueci a Senha -->
+      <div class="form-panel" id="panelForgot">
+        <h2 class="title">Recuperação de Senha</h2>
+        <p class="subtitle">Informe o e-mail cadastrado. Enviaremos um link seguro para você redefinir sua senha.</p>
+
+        <div class="field">
+          <label for="forgotEmail">E-mail</label>
+          <input type="email" id="forgotEmail" placeholder="seuemail@exemplo.com">
+        </div>
+
+        <button class="btn-primary" type="button">Enviar link de recuperação</button>
+
+        <p class="switch-line"><a id="goBackLogin">Voltar para o Login</a></p>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- VLIBRAS -->
+<div vw class="enabled">
+  <div vw-access-button></div>
+  <div vw-plugin-wrapper>
+    <div class="plugin-wrapper"></div>
+  </div>
+</div>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+  new window.VLibras.Widget('https://vlibras.gov.br/app');
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>
