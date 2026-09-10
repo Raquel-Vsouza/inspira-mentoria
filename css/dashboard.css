@@ -1,0 +1,644 @@
+/* =========================================
+   ESTILOS DO DASHBOARD (SUPORTE A LIGHT & DARK MODE)
+   ========================================= */
+
+/* Cores padrão para o Modo Claro (Light Mode) */
+body.dashboard-body {
+  background-color: var(--cream, #faf6ee) !important;
+  color: var(--ink, #1c1c22);
+  overflow-y: auto !important;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Cores para o Modo Escuro (Dark Mode) */
+body.dashboard-body.dark-mode {
+  background-color: #090c1b !important;
+  color: #f0f2f5;
+}
+
+.dash-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: var(--field-bg, rgba(9, 12, 27, 0.95));
+  border-bottom: 1px solid var(--field-border, #1e2642);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  box-sizing: border-box;
+  gap: 20px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.dash-logo-area {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header-brand-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dash-logo-text {
+  color: #E0B84A;
+  font-size: 28px;
+  font-family: Georgia, serif;
+  letter-spacing: 2px;
+}
+
+.dash-nav {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.dash-nav a {
+  color: var(--muted, #949ab0);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.dash-nav a:hover, .dash-nav a.active {
+  color: #E0B84A;
+}
+
+/* Container do perfil do usuário */
+.dash-header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.dash-user-profile {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+body.dashboard-body.dark-mode .user-name {
+  color: #fff;
+}
+
+.user-avatar {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  background: #E0B84A;
+  color: #0c0f2e;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+/* Botão de tema unificado no header */
+.theme-toggle-dash {
+  background: var(--field-bg, #11152a);
+  border: 1px solid var(--field-border, #1e2642);
+  color: var(--ink, #f0f2f5);
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.3s ease;
+}
+
+body.dashboard-body.dark-mode .theme-toggle-dash {
+  background: #11152a;
+  color: #f0f2f5;
+  border-color: #1e2642;
+}
+
+.theme-toggle-dash:hover {
+  transform: scale(1.05);
+  border-color: #E0B84A;
+}
+
+.dashboard-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.dash-hero-banner {
+  background: linear-gradient(135deg, var(--field-bg, #11152a) 0%, var(--cream, #090c1b) 100%);
+  border: 1px solid var(--field-border, #1e2642);
+  border-radius: 16px;
+  padding: 50px;
+  margin-bottom: 30px;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.tag-transform {
+  color: #E0B84A;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.dash-hero-banner h1 {
+  font-family: Georgia, serif;
+  font-size: 36px;
+  margin: 10px 0 15px;
+  color: var(--ink);
+}
+
+body.dashboard-body.dark-mode .dash-hero-banner h1 {
+  color: #fff;
+}
+
+.dash-hero-banner p {
+  color: var(--muted, #949ab0);
+  font-size: 16px;
+  margin-bottom: 25px;
+}
+
+.dash-actions {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid #E0B84A;
+  color: #E0B84A;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-outline:hover {
+  background: rgba(224, 184, 74, 0.1);
+}
+
+.dash-grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.dash-card {
+  background: var(--field-bg, #11152a);
+  border: 1px solid var(--field-border, #1e2642);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s, border-color 0.2s, background-color 0.3s ease;
+}
+
+.dash-card:hover {
+  border-color: #E0B84A;
+  transform: translateY(-3px);
+}
+
+.dash-card h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+body.dashboard-body.dark-mode .dash-card h3 {
+  color: #fff;
+}
+
+.card-desc {
+  font-size: 14px;
+  color: var(--muted, #949ab0);
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.card-header-badge {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.badge-novo {
+  background: rgba(224, 184, 74, 0.2);
+  color: #E0B84A;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.ai-box-interactive {
+  display: flex;
+  background: var(--cream, #090c1b);
+  border: 1px solid var(--field-border, #1e2642);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.ai-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 12px 14px;
+  color: var(--ink);
+  font-size: 13px;
+  outline: none;
+}
+
+body.dashboard-body.dark-mode .ai-input {
+  color: #fff;
+}
+
+.ai-send-btn {
+  background: #E0B84A;
+  border: none;
+  color: #0c0f2e;
+  padding: 0 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-secondary-dash {
+  background: transparent;
+  border: none;
+  color: #E0B84A;
+  font-weight: 600;
+  text-align: left;
+  padding: 0;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+.btn-secondary-dash:hover {
+  text-decoration: underline;
+}
+
+.card-list-info {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  font-size: 13px;
+  color: var(--muted, #949ab0);
+}
+
+.card-list-info li {
+  margin-bottom: 6px;
+}
+
+.event-box {
+  background: var(--cream, #090c1b);
+  padding: 12px;
+  border-radius: 8px;
+  border-left: 3px solid #E0B84A;
+  font-size: 13px;
+  margin-bottom: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.event-box p {
+  margin: 4px 0 0;
+  color: var(--muted, #949ab0);
+}
+
+.evolution-progress-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.progress-circle {
+  width: 70px;
+  height: 70px;
+  border: 4px solid var(--field-border, #1e2642);
+  border-top-color: #E0B84A;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+  color: var(--ink);
+}
+
+body.dashboard-body.dark-mode .progress-circle {
+  color: #fff;
+}
+
+.evolution-steps {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background: var(--field-border, #1e2642);
+  border-radius: 50%;
+}
+
+.dot.active {
+  background: #E0B84A;
+}
+
+.mentors-section {
+  margin-top: 50px;
+}
+
+.section-title-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.section-title-wrap h2 {
+  font-family: Georgia, serif;
+  font-size: 24px;
+  color: var(--ink);
+  margin: 0;
+}
+
+body.dashboard-body.dark-mode .section-title-wrap h2 {
+  color: #fff;
+}
+
+.link-see-all {
+  color: #E0B84A;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.mentors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.mentor-card {
+  background: var(--field-bg, #11152a);
+  border: 1px solid var(--field-border, #1e2642);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.mentor-card h4 {
+  margin: 0 0 4px;
+  color: var(--ink);
+  font-size: 16px;
+}
+
+body.dashboard-body.dark-mode .mentor-card h4 {
+  color: #fff;
+}
+
+.mentor-role {
+  font-size: 13px;
+  color: var(--muted, #949ab0);
+  margin: 0 0 10px;
+}
+
+.mentor-tag {
+  background: rgba(224, 184, 74, 0.1);
+  color: #E0B84A;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.mentor-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--muted, #949ab0);
+  margin-top: 20px;
+  border-top: 1px solid var(--field-border, #1e2642);
+  padding-top: 12px;
+}
+
+/* =========================================
+   ESTILOS DO MODAL DE CALENDÁRIO / AGENDAMENTO (CORRIGIDO)
+   ========================================= */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(9, 12, 27, 0.85);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.modal-content {
+  background: #11152a;
+  border: 1px solid #1e2642;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 500px;
+  padding: 30px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+  box-sizing: border-box;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #1e2642;
+  padding-bottom: 15px;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-family: Georgia, serif;
+  color: #fff;
+  font-size: 20px;
+}
+
+.close-modal-btn {
+  background: transparent;
+  border: none;
+  color: #949ab0;
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-modal-btn:hover {
+  color: #E0B84A;
+}
+
+.modal-subtitle {
+  color: #949ab0;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.field-modal {
+  margin-bottom: 20px;
+}
+
+.field-modal label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.modal-select {
+  width: 100%;
+  padding: 12px;
+  background: #090c1b;
+  border: 1px solid #1e2642;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+}
+
+.slots-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.time-slot {
+  background: #090c1b;
+  border: 1px solid #1e2642;
+  color: #949ab0;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.time-slot:hover, .time-slot.active-slot {
+  border-color: #E0B84A;
+  color: #E0B84A;
+  background: rgba(224, 184, 74, 0.05);
+}
+
+/* =========================================
+   MEDIA QUERIES PARA RESPONSIVIDADE
+   ========================================= */
+
+/* Tablets e telas médias (até 992px) */
+@media (max-width: 992px) {
+  .dash-header {
+    padding: 15px 20px;
+  }
+  
+  .dash-nav {
+    display: none; /* Esconde o menu principal em telas menores (ideal para implementar menu hambúrguer futuramente) */
+  }
+
+  .dash-hero-banner {
+    padding: 30px 20px;
+  }
+
+  .dash-hero-banner h1 {
+    font-size: 28px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .dashboard-main {
+    padding: 20px 15px;
+  }
+
+  .dash-header-right {
+    gap: 10px;
+  }
+
+  .user-name {
+    display: none !important; /* Oculta o nome e exibe apenas o avatar para economizar espaço */
+  }
+
+  .dash-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dash-actions button {
+    width: 100% !important;
+  }
+
+  .slots-grid {
+    grid-template-columns: 1fr; /* Alinha os horários do modal em coluna única */
+  }
+
+  .modal-content {
+    padding: 20px;
+    margin: 0 15px;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .dash-logo-text {
+    display: none; /* Oculta o texto do logo se necessário, mantendo apenas o ícone */
+  }
+
+  .dash-hero-banner h1 {
+    font-size: 24px;
+  }
+
+  .dash-card {
+    padding: 18px;
+  }
+}

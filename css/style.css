@@ -1,0 +1,406 @@
+:root {
+  --bg-dark: #090c1b; 
+  --gold: #E0B84A;
+  --gold-soft: #f0d68a;
+  --cream: #faf6ee;
+  --ink: #1c1c22;
+  --muted: #6b6f8a;
+  --field-bg: #ffffff;
+  --field-border: #e3ddcd;
+  --radius-sm: 8px;
+  --font-serif: Georgia, 'Times New Roman', serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --gold-glow: #FFE58F;
+}
+
+/* =========================================
+   DARK MODE (MODO ESCURO UNIFICADO)
+   ========================================= */
+body.dark-mode {
+  --cream: #090c1b;      
+  --ink: #f0f2f5;        
+  --muted: #949ab0;      
+  --field-bg: #11152a;   
+  --field-border: #1e2642; 
+}
+
+/* Botão Flutuante de Alternância de Tema */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: var(--field-bg);
+  border: 1px solid var(--field-border);
+  color: var(--ink);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* CORREÇÃO PARA PERMITIR SCROLL NO CELULAR E iOS */
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background: var(--cream);
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Estrutura Dividida 50/50 */
+.screen {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* =========================================
+   PAINEL ESQUERDO (ANIMADO: ACENDE E APAGA)
+   ========================================= */
+.panel-left {
+  position: relative;
+  overflow: hidden;
+  flex: 1 1 50%;
+  background-color: var(--bg-dark); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 450px;
+}
+
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  padding: 40px 20px;
+}
+
+/* --- LOGO E ESTRELA PRINCIPAL --- */
+.logo-container {
+  position: relative;
+  width: clamp(200px, 35vw, 350px); 
+  aspect-ratio: 1 / 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.main-star {
+  transition: all 0.4s ease-in-out;
+  transform-origin: 150px 45px;
+  cursor: pointer;
+}
+
+.main-star:hover {
+  transform: scale(1.3);
+  filter: drop-shadow(0 0 15px var(--gold-glow)) 
+          drop-shadow(0 0 30px var(--gold));
+}
+
+/* --- TEXTOS DA MARCA --- */
+.brand-title {
+  color: var(--gold);
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 400;
+  letter-spacing: 5px;
+  margin: 5px 0 10px 0;
+  text-transform: lowercase;
+}
+
+.brand-subtitle {
+  font-size: 1rem;
+  font-style: italic;
+  text-align: center;
+  line-height: 1.4;
+  margin: 0;
+  color: var(--muted);
+}
+
+/* --- ANIMAÇÃO DE ACENDER E APAGAR SUAVE --- */
+@keyframes acenderApagar {
+  0% { opacity: 0.05; }
+  50% { opacity: 1; filter: drop-shadow(0 0 6px var(--gold-glow)); }
+  100% { opacity: 0.05; }
+}
+
+/* --- ESTRELAS/NÓS DE CONEXÃO NO FUNDO --- */
+.nodes-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.node {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background-color: var(--gold);
+  border-radius: 50%;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  animation: acenderApagar 4s infinite ease-in-out;
+}
+
+.node:hover {
+  transform: scale(2);
+  background-color: #FFF;
+  box-shadow: 
+      0 0 10px var(--gold-glow),
+      0 0 20px var(--gold-glow),
+      0 0 40px var(--gold);
+  animation: none;
+}
+
+.node::before, .node::after {
+  content: '';
+  position: absolute;
+  background-color: rgba(224, 184, 74, 0.4); 
+  z-index: -1;
+  transition: background-color 0.3s ease;
+  animation: acenderApagar 4s infinite ease-in-out;
+}
+
+.node:hover::before, .node:hover::after {
+  background-color: rgba(255, 229, 143, 0.9);
+  animation: none;
+}
+
+/* Posições das conexões no fundo */
+.n1 { top: 20%; left: 20%; animation-delay: 0s; }
+.n1::before { width: 1px; height: 80px; bottom: 50%; left: 2px; animation-delay: 0.5s; }
+.n1::after { height: 1px; width: 15vw; top: 2px; left: 50%; animation-delay: 1s; }
+
+.n2 { top: 20%; right: 20%; animation-delay: 1.5s; }
+.n2::before { width: 1px; height: 90px; top: 2px; left: 2px; animation-delay: 2s; }
+.n2::after { height: 1px; width: 15vw; top: 2px; right: 50%; animation-delay: 2.5s; }
+
+.n3 { bottom: 30%; left: 25%; animation-delay: 2s; }
+.n3::before { width: 1px; height: 90px; top: 50%; left: 2px; animation-delay: 2.5s; }
+.n3::after { height: 1px; width: 10vw; top: 2px; right: 50%; animation-delay: 3s; }
+
+.n4 { bottom: 25%; right: 20%; animation-delay: 0.8s; }
+.n4::before { width: 1px; height: 80px; bottom: 50%; left: 2px; animation-delay: 1.3s; }
+.n4::after { height: 1px; width: 15vw; top: 2px; left: 50%; animation-delay: 1.8s; }
+
+
+/* =========================================
+   PAINEL DIREITO (FORMULÁRIO)
+   ========================================= */
+.panel-right {
+  flex: 1 1 50%;
+  background: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  overflow-y: visible;
+  transition: background-color 0.3s ease;
+}
+
+.form-wrap {
+  width: 100%;
+  max-width: 400px;
+}
+
+.form-panel {
+  display: none;
+}
+
+.form-panel.active {
+  display: block;
+}
+
+.help-text {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 6px 0 0;
+}
+
+.help-text.success-text {
+  color: #2f8f5b;
+}
+
+.help-text.error-text {
+  color: #d9534f;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: clamp(26px, 5vw, 32px);
+  margin: 0 0 12px;
+  color: var(--ink);
+}
+
+.subtitle {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 0 0 32px;
+}
+
+.field {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--ink);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"] {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--field-border);
+  border-radius: var(--radius-sm);
+  background: var(--field-bg);
+  font-size: 16px; /* Evita zoom automático em inputs no iOS */
+  font-family: var(--font-sans);
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(224,184,74,0.2);
+}
+
+.input-wrap {
+  position: relative;
+}
+
+.input-wrap input {
+  padding-right: 48px;
+}
+
+.toggle-pass {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input[type="password"]::-ms-reveal {
+  display: none;
+}
+
+.row-between {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 28px;
+}
+
+.link-muted {
+  font-size: 14px;
+  color: var(--muted);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.link-muted:hover {
+  text-decoration: underline;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 16px 20px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(180deg, var(--gold-soft), var(--gold));
+  color: #0c0f2e;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px -6px rgba(224,184,74,0.5);
+}
+
+.switch-line {
+  text-align: center;
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 24px;
+}
+
+.switch-line a {
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.switch-line a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================
+   RESPONSIVO PARA CELULARES E TABLETS (< 900px)
+   ========================================= */
+@media (max-width: 900px) {
+  .screen {
+    flex-direction: column;
+    height: auto;
+  }
+  
+  .panel-left {
+    min-height: 350px;
+    width: 100%;
+    flex: none;
+  }
+
+  .panel-right {
+    width: 100%;
+    flex: none;
+    padding: 32px 20px 50px 20px;
+  }
+}

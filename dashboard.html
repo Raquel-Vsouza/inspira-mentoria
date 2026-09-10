@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inspira — Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="dark-mode dashboard-body">
+
+  <!-- BARRA DE NAVEGAÇÃO SUPERIOR -->
+  <header class="dash-header">
+    
+    <!-- Lado Esquerdo: Logo e Ícone lado a lado -->
+    <div class="dash-logo-area">
+      <div class="header-brand-icon">
+        <svg viewBox="0 0 300 300" width="100%" height="100%">
+          <ellipse cx="150" cy="160" rx="140" ry="40" fill="none" stroke="rgba(221, 170, 85, 0.4)" stroke-width="3" transform="rotate(-15 150 160)" />
+          <polygon points="60,230 240,230 150,70" fill="#152E2E" />
+          <polygon points="80,230 220,230 150,90" fill="#2B625C" />
+          <path d="M 150 120 L 205 230 L 165 230 L 150 190 L 135 230 L 95 230 Z" fill="#DDAA55" />
+          <polygon points="150,25 155,40 172,40 158,50 163,65 150,55 137,65 142,50 128,40 145,40" fill="#DDAA55" />
+        </svg>
+      </div>
+      <span class="dash-logo-text">inspira</span>
+    </div>
+    
+    <!-- Centro: Menu de Navegação -->
+    <nav class="dash-nav">
+      <a href="#" class="active">Início</a>
+      <a href="#">Encontrar Mentor</a>
+      <a href="#">Como funciona</a>
+      <a href="#">Áreas</a>
+      <a href="#">Recursos</a>
+    </nav>
+    
+    <!-- Lado Direito: Perfil e Botão de Tema Unificado -->
+    <div class="dash-header-right">
+      <div class="dash-user-profile">
+        <span class="user-name">Raquel Vitória</span>
+        <div class="user-avatar">RV</div>
+      </div>
+      
+      <button class="theme-toggle-dash" id="themeToggleBtn" title="Alternar Modo Escuro">
+        <svg id="themeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
+    </div>
+
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL DO DASHBOARD -->
+  <main class="dashboard-main">
+
+    <!-- HERO SECTION DO DASHBOARD -->
+    <section class="dash-hero-banner">
+      <div class="dash-hero-content">
+        <span class="tag-transform">✦ MENTORIA QUE TRANSFORMA</span>
+        <h1>Seu futuro começa com a conexão certa.</h1>
+        <p>Encontre o mentor ideal e caminhe ao lado de quem já conquistou o futuro que você deseja.</p>
+        <div class="dash-actions">
+          <button class="btn-primary" style="width: auto; padding: 12px 24px;">Encontrar um mentor →</button>
+          <button class="btn-outline">Quero ser mentor</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- GRID DE CARDS PRINCIPAIS -->
+    <div class="dash-grid-cards">
+
+      <!-- Card 1: Inspira AI -->
+      <div class="dash-card ai-card">
+        <div class="card-header-badge">
+          <h3>Inspira AI</h3>
+          <span class="badge-novo">NOVO</span>
+        </div>
+        <p class="card-desc">Sua IA de carreira 24/7. Converse por mensagem ou voz sobre dúvidas e próximos passos.</p>
+        <div class="ai-box-interactive">
+          <input type="text" placeholder="Falar com a IA ou digitar mensagem..." class="ai-input">
+          <button class="ai-send-btn">→</button>
+        </div>
+      </div>
+
+      <!-- Card 2: Teste Vocacional -->
+      <div class="dash-card">
+        <h3>Teste Vocacional</h3>
+        <p class="card-desc">Descubra suas habilidades, interesses e o caminho ideal para o seu futuro.</p>
+        <ul class="card-list-info">
+          <li>✓ 10 minutos</li>
+          <li>✓ 100% online</li>
+          <li>✓ Resultado personalizado</li>
+        </ul>
+        <button class="btn-secondary-dash">Fazer teste →</button>
+      </div>
+
+      <!-- Card 3: Calendário -->
+      <div class="dash-card">
+        <h3>Calendário</h3>
+        <p class="card-desc">Organize seus compromissos e nunca perca uma mentoria.</p>
+        <div class="calendar-preview">
+          <div class="event-box">
+            <strong>Próxima mentoria:</strong>
+            <p>Mentoria com Carlos Almeida — 15 Mai, 16:00</p>
+          </div>
+        </div>
+        <button class="btn-secondary-dash" id="openCalendarBtn" onclick="document.getElementById('calendarModal').classList.add('active')">Ver calendário e agendar →</button>
+      </div>
+
+      <!-- Card 4: Plano de Evolução -->
+      <div class="dash-card evolution-card">
+        <h3>Plano de Evolução</h3>
+        <p class="card-desc">Acompanhe seu progresso, defina metas e conquiste novos níveis.</p>
+        <div class="evolution-progress-wrap">
+          <div class="progress-circle">65%</div>
+        </div>
+        <div class="evolution-steps">
+          <span class="dot active"></span>
+          <span class="dot active"></span>
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+        <button class="btn-secondary-dash">Ver meu plano →</button>
+      </div>
+
+    </div> <!-- Fim da grid de cards -->
+
+    <!-- SEÇÃO: MENTORES EM DESTAQUE -->
+    <section class="mentors-section">
+      <div class="section-title-wrap">
+        <h2>Mentores em destaque</h2>
+        <a href="#" class="link-see-all">Ver todos os mentores →</a>
+      </div>
+
+      <div class="mentors-grid">
+        <!-- Mentor 1 -->
+        <div class="mentor-card">
+          <div class="mentor-info">
+            <h4>Carlos Almeida</h4>
+            <p class="mentor-role">CEO na TechVision</p>
+            <span class="mentor-tag">Tecnologia</span>
+          </div>
+          <div class="mentor-footer">
+            <span>★ 4,9</span>
+            <span>15 anos exp.</span>
+          </div>
+        </div>
+
+        <!-- Mentor 2 -->
+        <div class="mentor-card">
+          <div class="mentor-info">
+            <h4>Juliana Martins</h4>
+            <p class="mentor-role">Diretora Financeira</p>
+            <span class="mentor-tag">Finanças</span>
+          </div>
+          <div class="mentor-footer">
+            <span>★ 4,9</span>
+            <span>12 anos exp.</span>
+          </div>
+        </div>
+
+        <!-- Mentor 3 -->
+        <div class="mentor-card">
+          <div class="mentor-info">
+            <h4>Rafael Oliveira</h4>
+            <p class="mentor-role">Empreendedor Serial</p>
+            <span class="mentor-tag">Empreendedorismo</span>
+          </div>
+          <div class="mentor-footer">
+            <span>★ 4,8</span>
+            <span>10 anos exp.</span>
+          </div>
+        </div>
+
+        <!-- Mentor 4 -->
+        <div class="mentor-card">
+          <div class="mentor-info">
+            <h4>Camila Rocha</h4>
+            <p class="mentor-role">Head de Marketing</p>
+            <span class="mentor-tag">Marketing</span>
+          </div>
+          <div class="mentor-footer">
+            <span>★ 4,9</span>
+            <span>9 anos exp.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODAL DE CALENDÁRIO / AGENDAMENTO -->
+    <div class="modal-overlay" id="calendarModal" onclick="if(event.target === this) this.classList.remove('active')">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Agenda de Mentores Disponíveis</h3>
+          <button class="close-modal-btn" id="closeModalBtn" onclick="document.getElementById('calendarModal').classList.remove('active')">&times;</button>
+        </div>
+        
+        <div class="modal-body">
+          <p class="modal-subtitle">Escolha um profissional, selecione um horário livre e confirme seu agendamento:</p>
+          
+          <div class="field-modal">
+            <label>Profissional / Mentor</label>
+            <select id="mentorSelect" class="modal-select">
+              <option value="carlos">Carlos Almeida — Tecnologia (CEO TechVision)</option>
+              <option value="juliana">Juliana Martins — Finanças (Diretora Financeira)</option>
+              <option value="rafael">Rafael Oliveira — Empreendedorismo</option>
+              <option value="camila">Camila Rocha — Marketing (Head de Marketing)</option>
+            </select>
+          </div>
+
+          <div class="field-modal">
+            <label>Horários Livres na Semana</label>
+            <div class="slots-grid">
+              <button type="button" class="time-slot" onclick="document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('active-slot')); this.classList.add('active-slot');" data-time="15 Mai - 14:00">15 Mai às 14:00</button>
+              <button type="button" class="time-slot active-slot" onclick="document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('active-slot')); this.classList.add('active-slot');" data-time="15 Mai - 16:00">15 Mai às 16:00</button>
+              <button type="button" class="time-slot" onclick="document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('active-slot')); this.classList.add('active-slot');" data-time="16 Mai - 10:00">16 Mai às 10:00</button>
+              <button type="button" class="time-slot" onclick="document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('active-slot')); this.classList.add('active-slot');" data-time="17 Mai - 15:30">17 Mai às 15:30</button>
+            </div>
+          </div>
+
+          <button class="btn-primary" id="confirmBookingBtn" style="width: 100%; margin-top: 20px;" onclick="
+            const sel = document.getElementById('mentorSelect');
+            const mentor = sel ? sel.options[sel.selectedIndex].text.split('—')[0].trim() : 'Mentor';
+            const activeSlot = document.querySelector('.time-slot.active-slot');
+            const timeText = activeSlot ? activeSlot.getAttribute('data-time') : 'Horário selecionado';
+            alert('Mentoria agendada com sucesso!\n\nProfissional: ' + mentor + '\nHorário: ' + timeText);
+            document.getElementById('calendarModal').classList.remove('active');
+          ">Confirmar Agendamento</button>
+        </div>
+      </div>
+    </div>
+    
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
