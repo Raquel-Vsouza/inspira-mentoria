@@ -383,9 +383,6 @@ input[type="password"]::-ms-reveal {
   text-decoration: underline;
 }
 
-/* =========================================
-   RESPONSIVO PARA CELULARES E TABLETS (< 900px)
-   ========================================= */
 @media (max-width: 900px) {
   .screen {
     flex-direction: column;
