@@ -1,0 +1,301 @@
+/* Estilos gerais da página e painel de mentores */
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: #0f172a;
+  color: #f8fafc;
+  margin: 0;
+  padding: 0;
+}
+
+.dash-header {
+  background: #1e293b;
+  border-bottom: 1px solid #334155;
+  padding: 1rem 2rem;
+}
+
+.dash-header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dash-logo-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dash-logo-text {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.dash-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.dash-nav a {
+  color: #94a3b8;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.dash-nav a.active {
+  color: #38bdf8;
+}
+
+.dash-header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.dash-user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-name {
+  font-size: 0.9rem;
+}
+
+.user-avatar, .avatar {
+  background: #334155;
+  color: #fff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+
+.theme-toggle-dash {
+  background: transparent;
+  border: 1px solid #334155;
+  color: #94a3b8;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.page-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.badge {
+  color: #fbbf24;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 2.25rem;
+  margin: 10px 0;
+}
+
+.subtitle {
+  color: #94a3b8;
+  margin-bottom: 30px;
+}
+
+.search-wrap {
+  display: flex;
+  align-items: center;
+  background: #1e293b;
+  border: 1px solid #334155;
+  padding: 12px 16px;
+  border-radius: 8px;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-wrap input {
+  background: transparent;
+  border: none;
+  color: #fff;
+  outline: none;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.filter-pill {
+  background: #1e293b;
+  border: 1px solid #334155;
+  color: #94a3b8;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.filter-pill.active {
+  background: #38bdf8;
+  color: #0f172a;
+  border-color: #38bdf8;
+  font-weight: 600;
+}
+
+.sort-wrap {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.sort-select {
+  background: #1e293b;
+  color: #fff;
+  border: 1px solid #334155;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  position: relative;
+}
+
+.card.featured {
+  border-color: #fbbf24;
+}
+
+.featured-tag {
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  background: #fbbf24;
+  color: #0f172a;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.card-header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.card-name {
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-role {
+  color: #94a3b8;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.card-desc {
+  color: #cbd5e1;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.card-rating {
+  font-size: 0.85rem;
+  color: #fbbf24;
+}
+
+.tags-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.free-tag {
+  background: rgba(56, 189, 248, 0.1);
+  color: #38bdf8;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.availability {
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  background: #10b981;
+  border-radius: 50%;
+}
+
+.card-btn {
+  background: #38bdf8;
+  color: #0f172a;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.no-results {
+  display: none;
+  text-align: center;
+  color: #94a3b8;
+  margin-top: 40px;
+}
+
+/* Modal */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-box {
+  background: #1e293b;
+  border: 1px solid #334155;
+  padding: 30px;
+  border-radius: 12px;
+  width: 400px;
+  max-width: 90%;
+}
+
+.modal-success {
+  display: none;
+  text-align: center;
+}

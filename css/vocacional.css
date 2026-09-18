@@ -1,0 +1,252 @@
+/* ---------- tela de escolha: rápido x personalizado ---------- */
+
+.tv-choice-eyebrow {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--ink, #1c1c22);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+body.dashboard-body.dark-mode .tv-choice-eyebrow {
+  color: #fff;
+}
+
+.tv-choice-eyebrow strong {
+  color: #E0B84A;
+}
+
+.tv-choice-desc {
+  font-size: 13px;
+  color: var(--muted, #949ab0);
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.tv-choice-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tv-choice-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  background: var(--cream, #090c1b);
+  border: 1px solid var(--field-border, #1e2642);
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.tv-choice-card:hover {
+  border-color: #E0B84A;
+  background: rgba(224, 184, 74, 0.05);
+}
+
+.tv-choice-icon {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 10px;
+  background: rgba(224, 184, 74, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.tv-choice-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tv-choice-title {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--ink, #1c1c22);
+}
+
+body.dashboard-body.dark-mode .tv-choice-title {
+  color: #fff;
+}
+
+.tv-choice-sub {
+  font-size: 12px;
+  color: var(--muted, #949ab0);
+}
+
+/* ==========================================================
+   INSPIRA — Teste Vocacional (estilos do modal #testeVocacionalModal)
+   Reaproveita as variáveis e o padrão visual do dashboard.css
+   (mesmo tratamento do .time-slot para os cards clicáveis).
+   Importe este arquivo depois de dashboard.css.
+   ========================================================== */
+
+.tv-step-label {
+  font-size: 12px;
+  color: var(--muted, #949ab0);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.tv-progress-bar-wrap {
+  width: 100%;
+  height: 6px;
+  background: var(--field-border, #1e2642);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.tv-progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: #E0B84A;
+  border-radius: 99px;
+  transition: width 0.35s ease;
+}
+
+.tv-question {
+  font-family: Georgia, serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 18px;
+  color: var(--ink, #1c1c22);
+}
+
+body.dashboard-body.dark-mode .tv-question {
+  color: #fff;
+}
+
+.tv-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Mesmo tratamento visual do .time-slot do modal de calendário */
+.tv-option-btn {
+  text-align: left;
+  background: var(--cream, #090c1b);
+  border: 1px solid var(--field-border, #1e2642);
+  color: var(--ink, #1c1c22);
+  padding: 13px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+body.dashboard-body.dark-mode .tv-option-btn {
+  color: #fff;
+}
+
+.tv-option-btn:hover,
+.tv-option-btn.tv-selected {
+  border-color: #E0B84A;
+  color: #E0B84A;
+  background: rgba(224, 184, 74, 0.05);
+}
+
+.tv-back-row {
+  margin-top: 18px;
+}
+
+.tv-link-btn {
+  background: none;
+  border: none;
+  color: var(--muted, #949ab0);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.tv-link-btn:hover {
+  color: #E0B84A;
+}
+
+/* ---------- tela de resultado ---------- */
+
+.tv-result-wrap {
+  text-align: center;
+  padding: 8px 4px;
+}
+
+.tv-result-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #E0B84A;
+  color: #0c0f2e;
+  font-size: 22px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.tv-result-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #E0B84A;
+  margin-bottom: 8px;
+}
+
+.tv-result-title {
+  font-family: Georgia, serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink, #1c1c22);
+  margin-bottom: 10px;
+}
+
+body.dashboard-body.dark-mode .tv-result-title {
+  color: #fff;
+}
+
+.tv-result-desc {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--muted, #949ab0);
+  margin-bottom: 24px;
+}
+
+.tv-result-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tv-retry-btn {
+  background: none;
+  border: 1px solid var(--field-border, #1e2642);
+  color: var(--muted, #949ab0);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tv-retry-btn:hover {
+  color: #E0B84A;
+  border-color: #E0B84A;
+}
+
+/* ---------- destaque de mentor recomendado ---------- */
+
+.mentor-card.mentor-highlight {
+  border-color: #E0B84A;
+  box-shadow: 0 0 0 1px #E0B84A;
+}

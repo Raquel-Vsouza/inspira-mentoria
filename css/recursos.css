@@ -1,0 +1,194 @@
+/* =========================================
+   ESTILOS DA PÁGINA DE RECURSOS (RECURSOS.CSS)
+   ========================================= */
+
+.recursos-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+.recursos-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.recursos-header h1 {
+  font-size: 32px;
+  font-weight: 800;
+  color: #fff;
+  margin: 10px 0 8px;
+}
+
+.recursos-header p {
+  color: #9ca3af;
+  font-size: 15px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Área de Busca */
+.recursos-search-wrap {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto 24px;
+  display: flex;
+  align-items: center;
+}
+
+.recursos-search-wrap svg {
+  position: absolute;
+  left: 16px;
+  pointer-events: none;
+}
+
+.recursos-search-wrap input[type="text"] {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(221, 170, 85, 0.25);
+  padding: 14px 16px 14px 48px;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+  
+  /* Remove qualquer brilho ou sombra padrão do navegador no foco */
+  outline: none;
+  box-shadow: none !important;
+}
+
+.recursos-search-wrap input[type="text"]:focus {
+  border-color: rgba(221, 170, 85, 0.6);
+  outline: none;
+  box-shadow: none !important;
+}
+
+/* Filtros por Pílulas */
+.recursos-filters {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.recursos-filter-pill {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #9ca3af;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.recursos-filter-pill:hover {
+  background: rgba(221, 170, 85, 0.1);
+  color: #fff;
+  border-color: rgba(221, 170, 85, 0.3);
+}
+
+.recursos-filter-pill.active {
+  background: #DDAA55;
+  color: #090c1b;
+  font-weight: 600;
+  border-color: #DDAA55;
+}
+
+/* Grid de Recursos */
+.recursos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.resource-card {
+  background: rgba(25, 30, 46, 0.6);
+  border: 1px solid rgba(221, 170, 85, 0.2);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.resource-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(221, 170, 85, 0.4);
+}
+
+.featured-card {
+  background: linear-gradient(135deg, rgba(221, 170, 85, 0.08) 0%, rgba(25, 30, 46, 0.8) 100%);
+  border-color: rgba(221, 170, 85, 0.4);
+}
+
+.resource-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(221, 170, 85, 0.15);
+  color: #DDAA55;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.resource-tag {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #DDAA55;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.resource-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.resource-desc {
+  font-size: 13px;
+  color: #9ca3af;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.btn-download {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(221, 170, 85, 0.3);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-download:hover {
+  background: #DDAA55;
+  color: #090c1b;
+  border-color: #DDAA55;
+}
+
+.btn-ats-action {
+  background: #DDAA55;
+  color: #090c1b;
+  border-color: #DDAA55;
+}
+
+.btn-ats-action:hover {
+  background: #c59545;
+}

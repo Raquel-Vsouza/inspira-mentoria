@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Como Funciona - Inspira</title>
+  <link rel="stylesheet" href="css/como-funciona.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/chat-widget.css">
+
+  <!-- ESTILOS DA FAQ, CHATBOT E PERFIL -->
+  <style>
+    /* Estilos da FAQ */
+    .faq-section {
+      margin-top: 56px !important;
+      margin-bottom: 40px !important;
+      padding: 20px 0 !important;
+    }
+
+    .faq-title {
+      font-size: 28px !important;
+      font-weight: 800 !important;
+      margin-bottom: 8px !important;
+      text-align: center !important;
+      color: #ffffff !important;
+    }
+
+    .faq-subtitle {
+      font-size: 15px !important;
+      margin-bottom: 32px !important;
+      text-align: center !important;
+      opacity: 0.8 !important;
+      color: #94a3b8 !important;
+    }
+
+    .faq-container {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 14px !important;
+      max-width: 900px !important;
+      margin: 0 auto !important;
+    }
+
+    .faq-item {
+      background: #0e1329 !important;
+      border: 1px solid #262b3a !important;
+      border-radius: 12px !important;
+      overflow: hidden !important;
+      cursor: pointer !important;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease !important;
+    }
+
+    .faq-item:hover {
+      border-color: rgba(221, 170, 85, 0.4) !important;
+    }
+
+    .faq-item.active {
+      border-color: #DDAA55 !important;
+      box-shadow: 0 4px 20px rgba(221, 170, 85, 0.15) !important;
+    }
+
+    .faq-question {
+      padding: 20px 24px !important;
+      font-size: 16px !important;
+      font-weight: 600 !important;
+      color: #f0f2f5 !important;
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      gap: 16px !important;
+      user-select: none !important;
+      transition: color 0.3s ease !important;
+    }
+
+    .faq-item.active .faq-question {
+      color: #DDAA55 !important;
+    }
+
+    .faq-icon {
+      width: 20px !important;
+      height: 20px !important;
+      fill: #94a3b8 !important;
+      flex-shrink: 0 !important;
+      transition: transform 0.3s ease, fill 0.3s ease !important;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg) !important;
+      fill: #DDAA55 !important;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out, padding 0.3s ease;
+      padding: 0 24px;
+      color: #cbd5e1 !important;
+      font-size: 14px !important;
+      line-height: 1.6 !important;
+      background: rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .faq-item.active .faq-answer {
+      padding-bottom: 20px !important;
+    }
+
+    /* === ESTILOS DO MODAL DE PERFIL === */
+    .modal-overlay {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      background: rgba(11, 14, 23, 0.85) !important;
+      backdrop-filter: blur(8px) !important;
+      display: none;
+      align-items: center !important;
+      justify-content: center !important;
+      z-index: 100000 !important;
+      padding: 20px !important;
+    }
+
+    .modal-overlay.active {
+      display: flex !important;
+    }
+
+    .profile-modal-box {
+      background: #0e1329 !important;
+      border: 1px solid #262b3a !important;
+      border-radius: 20px !important;
+      padding: 32px !important;
+      width: 420px !important;
+      max-width: 100% !important;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8) !important;
+      position: relative !important;
+      text-align: center !important;
+      color: #f0f2f5 !important;
+      animation: modalFadeIn 0.3s ease-out !important;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.95) translateY(-10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .modal-close {
+      position: absolute !important;
+      top: 16px !important;
+      right: 16px !important;
+      background: rgba(255, 255, 255, 0.05) !important;
+      border: 1px solid #262b3a !important;
+      color: #94a3b8 !important;
+      width: 32px !important;
+      height: 32px !important;
+      border-radius: 50% !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      cursor: pointer !important;
+      transition: all 0.2s ease !important;
+    }
+
+    .modal-close:hover {
+      background: rgba(239, 68, 68, 0.2) !important;
+      color: #ef4444 !important;
+      border-color: #ef4444 !important;
+    }
+
+    .profile-modal-title {
+      font-size: 1.4rem !important;
+      font-weight: 700 !important;
+      color: #ffffff !important;
+      margin-bottom: 20px !important;
+    }
+
+    .profile-avatar-wrap {
+      display: flex !important;
+      justify-content: center !important;
+      margin-bottom: 16px !important;
+    }
+
+    .profile-avatar {
+      width: 76px !important;
+      height: 76px !important;
+      background: #DDAA55 !important;
+      color: #0b0e17 !important;
+      font-size: 1.8rem !important;
+      font-weight: bold !important;
+      border-radius: 50% !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      border: 3px solid rgba(221, 170, 85, 0.3) !important;
+      box-shadow: 0 4px 20px rgba(221, 170, 85, 0.25) !important;
+    }
+
+    .profile-name {
+      font-size: 1.2rem !important;
+      font-weight: 700 !important;
+      color: #ffffff !important;
+      margin-bottom: 4px !important;
+    }
+
+    .profile-role {
+      font-size: 0.8rem !important;
+      color: #DDAA55 !important;
+      margin-bottom: 20px !important;
+      font-weight: 700 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 1px !important;
+    }
+
+    .profile-info-box {
+      background: #1c2333 !important;
+      border: 1px solid #262b3a !important;
+      border-radius: 12px !important;
+      padding: 18px !important;
+      text-align: left !important;
+      margin-bottom: 24px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 12px !important;
+    }
+
+    .profile-field-label {
+      font-size: 0.75rem !important;
+      font-weight: 700 !important;
+      color: #94a3b8 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.5px !important;
+      margin-bottom: 2px !important;
+    }
+
+    .profile-field-value {
+      font-size: 0.95rem !important;
+      color: #f0f2f5 !important;
+      font-weight: 500 !important;
+    }
+
+    .profile-status {
+      font-size: 0.9rem !important;
+      color: #10b981 !important;
+      font-weight: 600 !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+    }
+
+    .profile-status .status-dot {
+      width: 8px !important;
+      height: 8px !important;
+      background: #10b981 !important;
+      border-radius: 50% !important;
+      display: inline-block !important;
+    }
+
+    .profile-input {
+      width: 100% !important;
+      padding: 10px 14px !important;
+      background: #0e1329 !important;
+      border: 1px solid #262b3a !important;
+      border-radius: 8px !important;
+      color: #fff !important;
+      font-size: 0.9rem !important;
+      outline: none !important;
+    }
+
+    .profile-input:focus {
+      border-color: #DDAA55 !important;
+    }
+
+    .profile-actions {
+      display: flex !important;
+      gap: 12px !important;
+    }
+
+    .profile-btn-primary {
+      flex: 1 !important;
+      background: #DDAA55 !important;
+      color: #0b0e17 !important;
+      border: none !important;
+      padding: 12px !important;
+      border-radius: 10px !important;
+      font-weight: 700 !important;
+      font-size: 0.9rem !important;
+      cursor: pointer !important;
+      transition: opacity 0.2s ease !important;
+    }
+
+    .profile-btn-primary:hover {
+      opacity: 0.9 !important;
+    }
+
+    .profile-btn-secondary {
+      flex: 1 !important;
+      background: rgba(239, 68, 68, 0.1) !important;
+      color: #ef4444 !important;
+      border: 1px solid rgba(239, 68, 68, 0.3) !important;
+      padding: 12px !important;
+      border-radius: 10px !important;
+      font-weight: 600 !important;
+      font-size: 0.9rem !important;
+      cursor: pointer !important;
+      transition: all 0.2s ease !important;
+    }
+
+    .profile-btn-secondary:hover {
+      background: #ef4444 !important;
+      color: #ffffff !important;
+    }
+
+    /* === CHATBOT E CÂMERA (DIREITO) === */
+    .chat-widget-toggle {
+      position: fixed !important;
+      bottom: 30px !important;
+      right: 30px !important;
+      width: 60px !important;
+      height: 60px !important;
+      background: #DDAA55 !important;
+      border-radius: 50% !important;
+      border: none !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      cursor: pointer !important;
+      box-shadow: 0 4px 20px rgba(221, 170, 85, 0.4) !important;
+      z-index: 99999 !important;
+      transition: transform 0.3s ease !important;
+    }
+
+    .chat-widget-toggle:hover {
+      transform: scale(1.1) !important;
+    }
+
+    .chat-widget-panel {
+      position: fixed !important;
+      bottom: 100px !important;
+      right: 30px !important;
+      width: 380px !important;
+      max-width: calc(100vw - 40px) !important;
+      height: 520px !important;
+      max-height: calc(100vh - 120px) !important;
+      background: #0e1329 !important;
+      border: 1px solid #262b3a !important;
+      border-radius: 16px !important;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6) !important;
+      display: none;
+      flex-direction: column !important;
+      overflow: hidden !important;
+      z-index: 99998 !important;
+    }
+
+    .chat-widget-panel.active {
+      display: flex !important;
+    }
+
+    .chat-widget-header {
+      background: #DDAA55 !important;
+      color: #0b0e17 !important;
+      padding: 16px 20px !important;
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      font-weight: bold !important;
+    }
+
+    .chat-widget-title {
+      font-size: 1.1rem !important;
+      font-weight: 700 !important;
+      color: #0b0e17 !important;
+    }
+
+    .chat-widget-status {
+      font-size: 0.8rem !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      color: #152E2E !important;
+    }
+
+    .chat-widget-status .status-dot {
+      width: 8px !important;
+      height: 8px !important;
+      background: #10b981 !important;
+      border-radius: 50% !important;
+      display: inline-block !important;
+    }
+
+    .chat-widget-close {
+      background: none !important;
+      border: none !important;
+      font-size: 24px !important;
+      color: #0b0e17 !important;
+      cursor: pointer !important;
+      line-height: 1 !important;
+    }
+
+    .chat-widget-messages {
+      flex: 1 !important;
+      padding: 16px !important;
+      overflow-y: auto !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 12px !important;
+      background: #0b0e17 !important;
+    }
+
+    .chat-bubble {
+      max-width: 80% !important;
+      padding: 12px 16px !important;
+      border-radius: 14px !important;
+      font-size: 0.9rem !important;
+      line-height: 1.4 !important;
+    }
+
+    .chat-bubble.bot {
+      background: #1c2333 !important;
+      color: #f0f2f5 !important;
+      align-self: flex-start !important;
+      border-bottom-left-radius: 2px !important;
+      border: 1px solid #262b3a !important;
+    }
+
+    .chat-bubble.user {
+      background: #DDAA55 !important;
+      color: #0b0e17 !important;
+      font-weight: 600 !important;
+      align-self: flex-end !important;
+      border-bottom-right-radius: 2px !important;
+    }
+
+    .chat-widget-input-wrapper {
+      background: #0e1329 !important;
+      border-top: 1px solid #262b3a !important;
+      padding: 12px !important;
+    }
+
+    .chat-widget-input-area {
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+
+    .chat-widget-input-area input {
+      flex: 1 !important;
+      padding: 10px 14px !important;
+      background: #1c2333 !important;
+      border: 1px solid #262b3a !important;
+      border-radius: 20px !important;
+      color: #fff !important;
+      outline: none !important;
+      font-size: 0.9rem !important;
+    }
+
+    .chat-widget-input-area input:focus {
+      border-color: #DDAA55 !important;
+    }
+
+    .chat-widget-icon-btn {
+      background: none !important;
+      border: none !important;
+      cursor: pointer !important;
+      padding: 6px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    .chat-widget-send-btn {
+      width: 38px !important;
+      height: 38px !important;
+      background: #DDAA55 !important;
+      border: none !important;
+      border-radius: 50% !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      cursor: pointer !important;
+    }
+
+    .chat-widget-footer {
+      font-size: 0.7rem !important;
+      color: #64748b !important;
+      text-align: center !important;
+      margin-top: 6px !important;
+    }
+  </style>
+</head>
+<body class="dashboard-body dark-mode">
+
+  <header class="dash-header">
+    <div class="dash-logo-area">
+      <div class="header-brand-icon">
+        <svg viewBox="0 0 300 300" width="32" height="32">
+          <ellipse cx="150" cy="160" rx="140" ry="40" fill="none" stroke="rgba(221, 170, 85, 0.4)" stroke-width="3" transform="rotate(-15 150 160)" />
+          <polygon points="60,230 240,230 150,70" fill="#152E2E" />
+          <polygon points="80,230 220,230 150,90" fill="#2B625C" />
+          <path d="M 150 120 L 205 230 L 165 230 L 150 190 L 135 230 L 95 230 Z" fill="#DDAA55" />
+          <polygon points="150,25 155,40 172,40 158,50 163,65 150,55 137,65 142,50 128,40 145,40" fill="#DDAA55" />
+        </svg>
+      </div>
+      <span class="dash-logo-text">inspira</span>
+    </div>
+    
+    <nav class="dash-nav">
+      <a href="dashboard.html">Início</a>
+      <a href="como-funciona.html" class="active">Como funciona</a>
+      <a href="recursos.html">Recursos</a>
+    </nav>
+    
+    <div class="dash-header-right">
+      <div class="dash-user-profile" onclick="openUserProfileModal()" title="Ver Perfil">
+        <span class="user-name">Raquel Vitória de Souza</span>
+        <div class="user-avatar" id="headerUserAvatar">RV</div>
+      </div>
+      
+      <button class="theme-toggle-dash" id="themeToggleBtn" title="Alternar Tema">
+        <svg id="themeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
+
+      <button class="theme-toggle-dash" title="Sair">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+
+    <!-- HERO BANNER -->
+    <section class="dash-hero-banner">
+      <div class="dash-hero-content" style="max-width: 800px;">
+        <span class="tag-transform">METODOLOGIA INSPIRA</span>
+        <h1>Seu futuro começa com a conexão certa.</h1>
+        <p style="font-size: 16px; line-height: 1.6; margin-top: 16px;">
+          Hoje, o estudante entra na universidade, escolhe uma profissão, cursa disciplinas, realiza avaliações e vivencia estágios. Mas, em algum momento, as grandes perguntas aparecem: 
+          <em>Que caminho eu quero seguir? Como é realmente trabalhar nessa área? O que o mercado espera de mim?</em>
+        </p>
+      </div>
+    </section>
+
+    <!-- O DILEMA DA APRENDIZAGEM -->
+    <section class="pillars-section" style="margin-top: 48px;">
+      <div class="dash-card" style="padding: 36px; margin-bottom: 32px;">
+        <h2 style="font-size: 22px; font-weight: 700; margin-bottom: 16px; color: #DDAA55;">Informação vs. Significado</h2>
+        <p style="font-size: 15px; line-height: 1.6; opacity: 0.9; margin-bottom: 16px;">
+          Ter acesso à informação não significa necessariamente conseguir responder a essas perguntas. Do ponto de vista da aprendizagem, existe uma diferença importante entre simplesmente receber uma informação e conseguir <strong>atribuir significado</strong> a ela.
+        </p>
+        <p style="font-size: 15px; line-height: 1.6; opacity: 0.9;">
+          Aprendemos quando conseguimos relacionar o novo ao que já conhecemos, interagir, experimentar, receber feedback e refletir. Um estudante pode assistir a uma palestra ou pesquisar em fontes especializadas, mas <strong>conversar com alguém que vive aquela realidade oferece outra experiência</strong>. É poder perguntar como aquela pessoa chegou até ali, descobrir desafios que não aparecem nos livros e confrontar expectativas com a prática.
+        </p>
+      </div>
+
+      <h2 style="font-size: 26px; font-weight: 800; margin-bottom: 8px; text-align: center;">Por que criamos o Inspira?</h2>
+      <p style="font-size: 15px; margin-bottom: 32px; text-align: center; opacity: 0.8;">O problema é que esse acesso nem sempre acontece de maneira fácil ou organizada.</p>
+
+      <div class="pillars-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; text-align: left;">
+        
+        <div class="dash-card" style="position: relative;">
+          <div style="position: absolute; top: 24px; right: 24px; font-size: 32px; font-weight: 900; opacity: 0.15;">01</div>
+          <div style="width: 44px; height: 44px; background: rgba(221, 170, 85, 0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 14px; font-weight: bold; color: #DDAA55;">PL</div>
+          <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">Mais que um Catálogo</h3>
+          <p style="font-size: 14px; line-height: 1.5; margin-bottom: 16px; opacity: 0.85;">O Inspira aproxima estudantes de profissionais e empresários dispostos a compartilhar suas experiências por meio da mentoria, sem pretender dizer qual caminho seguir, mas oferecendo referências reais.</p>
+        </div>
+
+        <div class="dash-card" style="position: relative;">
+          <div style="position: absolute; top: 24px; right: 24px; font-size: 32px; font-weight: 900; opacity: 0.15;">02</div>
+          <div style="width: 44px; height: 44px; background: rgba(221, 170, 85, 0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 14px; font-weight: bold; color: #DDAA55;">JO</div>
+          <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">A Jornada do Estudante</h3>
+          <p style="font-size: 14px; line-height: 1.5; margin-bottom: 16px; opacity: 0.85;">Tudo começa com você identificando onde está, seus interesses e o que deseja desenvolver. A plataforma te apoia a explorar possibilidades compatíveis com seu momento.</p>
+        </div>
+
+        <div class="dash-card" style="position: relative;">
+          <div style="position: absolute; top: 24px; right: 24px; font-size: 32px; font-weight: 900; opacity: 0.15;">03</div>
+          <div style="width: 44px; height: 44px; background: rgba(221, 170, 85, 0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 14px; font-weight: bold; color: #DDAA55;">TE</div>
+          <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">Tecnologia & Conexão</h3>
+          <p style="font-size: 14px; line-height: 1.5; margin-bottom: 16px; opacity: 0.85;">A tecnologia entra para facilitar o direcionamento, busca e agendamento, mas nunca substitui a conexão humana: ela apenas ajuda essa troca a acontecer de forma acessível.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TRILHA EM 4 MOMENTOS -->
+    <section class="pillars-section" style="margin-top: 56px; text-align: center;">
+      <h2 style="font-size: 28px; font-weight: 800; margin-bottom: 8px;">A Jornada em 4 Momentos</h2>
+      <p style="font-size: 15px; margin-bottom: 32px; opacity: 0.8;">Organizamos sua evolução profissional em uma trilha contínua e estruturada.</p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; text-align: left;">
+        <div class="dash-card" style="border-top: 4px solid #DDAA55;">
+          <span style="font-size: 20px; font-weight: 900; color: #DDAA55;">01</span>
+          <h3 style="font-size: 17px; font-weight: 700; margin: 8px 0;">Direção</h3>
+          <p style="font-size: 13px; opacity: 0.85;">Avaliação inicial de clareza de objetivos, mercado e competências a desenvolver.</p>
+        </div>
+        <div class="dash-card" style="border-top: 4px solid #DDAA55;">
+          <span style="font-size: 20px; font-weight: 900; color: #DDAA55;">02</span>
+          <h3 style="font-size: 17px; font-weight: 700; margin: 8px 0;">Conexão</h3>
+          <p style="font-size: 13px; opacity: 0.85;">O encontro de mentoria real, perguntas, troca de experiências práticas e feedback.</p>
+        </div>
+        <div class="dash-card" style="border-top: 4px solid #DDAA55;">
+          <span style="font-size: 20px; font-weight: 900; color: #DDAA55;">03</span>
+          <h3 style="font-size: 17px; font-weight: 700; margin: 8px 0;">Evolução</h3>
+          <p style="font-size: 13px; opacity: 0.85;">Retomada de indicadores e reflexão: o que mudou na percepção e quais os próximos passos?</p>
+        </div>
+        <div class="dash-card" style="border-top: 4px solid #DDAA55;">
+          <span style="font-size: 20px; font-weight: 900; color: #DDAA55;">04</span>
+          <h3 style="font-size: 17px; font-weight: 700; margin: 8px 0;">Conquista</h3>
+          <p style="font-size: 13px; opacity: 0.85;">Segurança reforçada para tomar decisões e construir autonomia na sua carreira.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEMONSTRAÇÃO / MATCH DINÂMICO -->
+    <section id="demo-section" class="dash-hero-banner" style="margin-top: 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center;">
+      <div>
+        <span class="tag-transform">TESTE A METODOLOGIA</span>
+        <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 12px;">Como funciona o Match Dinâmico?</h2>
+        <p style="font-size: 14px; line-height: 1.5; margin-bottom: 20px; opacity: 0.85;">Em vez de procurar por mentores sem rumo, nosso sistema analisa seu desafio atual e conecta você instantaneamente com o especialista ideal para o seu momento.</p>
+        
+        <label style="font-size: 13px; font-weight: 600; display: block; margin-bottom: 8px;">Digite seu desafio técnico ou de carreira:</label>
+        <input type="text" id="demoInput" placeholder="Ex: Preciso entender os desafios de migração para Cloud AWS..." style="width: 100%; border: 1px solid rgba(221, 170, 85, 0.4); padding: 12px; border-radius: 8px; font-size: 13px; margin-bottom: 16px; background: rgba(0,0,0,0.2); color: inherit;">
+        
+        <button type="button" onclick="runDemoMatch()" style="width: 100%; background: #DDAA55; color: #090c1b; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer;">Acionar Sistema & Encontrar Mentor</button>
+      </div>
+
+      <div style="border: 1px solid rgba(221, 170, 85, 0.3); border-radius: 14px; padding: 24px; min-height: 220px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #10b981; font-weight: 600;">
+          <span style="width: 8px; height: 8px; background: #10b981; border-radius: 50%; display: inline-block;"></span> Sistema em modo de escuta ativa...
+        </div>
+        <div id="demoOutputBox" style="border: 1px solid rgba(221, 170, 85, 0.2); padding: 16px; border-radius: 8px; font-family: monospace; font-size: 13px; margin-top: 16px; opacity: 0.85; line-height: 1.5;">
+          [Sistema Pronto] Insira seu desafio ao lado e clique no botão para testar o algoritmo de pareamento instantâneo da Inspira.
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="faq-section">
+      <h2 class="faq-title">Perguntas Frequentes</h2>
+      <p class="faq-subtitle">Esclareça suas dúvidas sobre a plataforma e a nossa metodologia.</p>
+      
+      <div class="faq-container">
+        
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <span>O Inspira decide o meu caminho profissional por mim?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+          </div>
+          <div class="faq-answer">
+            De forma alguma! O Inspira não pretende dizer qual caminho você deve seguir. Queremos oferecer experiências e referências para que você tenha autonomia e mais elementos para construir sua própria decisão.
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <span>Como a avaliação antes e depois da mentoria funciona?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+          </div>
+          <div class="faq-answer">
+            Antes da conversa, mapeamos sua clareza de passos e mercado. Depois da mentoria, respondemos aos mesmos indicadores para você refletir sobre o quanto evoluiu e qual é o seu próximo passo prático.
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <span>Quem são os mentores disponíveis na plataforma?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+          </div>
+          <div class="faq-answer">
+            Profissionais e empresários atuantes no mercado dispostos a compartilhar vivências reais, desafios práticos e feedbacks construtivos com estudantes.
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <span>Posso usar o assistente a qualquer momento?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+          </div>
+          <div class="faq-answer">
+            Sim! O assistente virtual está disponível 24h por dia no widget flutuante para apoiar seu direcionamento, tirar dúvidas e auxiliar na preparação para suas mentorias.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PERFIL DO USUÁRIO (CORRIGIDO E ESTILIZADO) -->
+  <div class="modal-overlay" id="userProfileModal" onclick="closeProfileOnOverlay(event)">
+    <div class="modal-box profile-modal-box">
+      <button class="modal-close" onclick="closeUserProfileModal()" aria-label="Fechar">&times;</button>
+
+      <h2 class="profile-modal-title">Perfil do Usuário</h2>
+
+      <!-- MODO DE VISUALIZAÇÃO -->
+      <div id="profileViewMode">
+        <div class="profile-avatar-wrap">
+          <div class="profile-avatar" id="profileAvatarView">RV</div>
+        </div>
+        <p class="profile-name" id="profileNameView">Raquel Vitória de Souza</p>
+        <p class="profile-role">Aluna / Mentorada</p>
+
+        <div class="profile-info-box">
+          <div>
+            <p class="profile-field-label">E-MAIL</p>
+            <p class="profile-field-value" id="profileEmailView">raquel.vitoria@exemplo.com</p>
+          </div>
+
+          <div>
+            <p class="profile-field-label">CURSO</p>
+            <p class="profile-field-value" id="profileCourseView">Análise e Desenvolvimento de Sistemas</p>
+          </div>
+
+          <div>
+            <p class="profile-field-label">STATUS DA CONTA</p>
+            <p class="profile-status"><span class="status-dot"></span>Ativa</p>
+          </div>
+        </div>
+
+        <div class="profile-actions">
+          <button class="profile-btn-primary" onclick="enableProfileEdit()">Editar Perfil</button>
+          <button class="profile-btn-secondary" onclick="closeUserProfileModal()">Sair</button>
+        </div>
+      </div>
+
+      <!-- MODO DE EDIÇÃO -->
+      <div id="profileEditMode" style="display: none;">
+        <div class="profile-avatar-wrap">
+          <div class="profile-avatar" id="profileAvatarEdit">RV</div>
+        </div>
+
+        <div class="profile-info-box" style="margin-top: 10px;">
+          <div>
+            <p class="profile-field-label">NOME COMPLETO</p>
+            <input type="text" class="profile-input" id="profileNameInput" value="Raquel Vitória de Souza">
+          </div>
+
+          <div>
+            <p class="profile-field-label">E-MAIL</p>
+            <input type="email" class="profile-input" id="profileEmailInput" value="raquel.vitoria@exemplo.com">
+          </div>
+
+          <div>
+            <p class="profile-field-label">CURSO</p>
+            <input type="text" class="profile-input" id="profileCourseInput" value="Análise e Desenvolvimento de Sistemas">
+          </div>
+        </div>
+
+        <div class="profile-actions">
+          <button class="profile-btn-primary" onclick="saveProfileChanges()">Salvar Alterações</button>
+          <button class="profile-btn-secondary" onclick="cancelProfileEdit()">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WIDGET DE CHAT FLUTUANTE NO LADO DIREITO COM CÂMERA -->
+  <button id="chatWidgetToggle" class="chat-widget-toggle" onclick="toggleChatWidget()" title="Falar com o Assistente">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="#0b0e17">
+      <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+    </svg>
+  </button>
+
+  <div id="chatWidgetPanel" class="chat-widget-panel">
+    <div class="chat-widget-header">
+      <div>
+        <div class="chat-widget-title">Inspira Assistente</div>
+        <div class="chat-widget-status"><span class="status-dot"></span> Online agora</div>
+      </div>
+      <button id="chatWidgetClose" class="chat-widget-close" onclick="toggleChatWidget()" title="Fechar">&times;</button>
+    </div>
+
+    <div id="chatWidgetMessages" class="chat-widget-messages">
+      <div class="chat-bubble bot">Olá, Raquel! Sou o assistente virtual. Como posso ajudar você hoje?</div>
+    </div>
+
+    <!-- ÁREA DA CÂMERA DE VÍDEO -->
+    <div id="chatVideoArea" class="chat-video-area" style="display: none; padding: 12px 16px; border-top: 1px solid #262b3a; background: #0c1022;">
+      <video id="chatVideoPreview" autoplay muted playsinline style="width: 100%; border-radius: 10px; background: #000; max-height: 160px; object-fit: cover;"></video>
+      <button id="chatVideoEnd" onclick="endVideoCall()" style="margin-top: 8px; width: 100%; background: #ef4444; color: #fff; border: none; padding: 8px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer;">Encerrar chamada de vídeo</button>
+    </div>
+
+    <div class="chat-widget-input-wrapper">
+      <div class="chat-widget-input-area">
+        <button id="chatVideoBtn" class="chat-widget-icon-btn" onclick="toggleVideoCall()" title="Iniciar Chamada de Vídeo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#DDAA55" stroke-width="2">
+            <path d="M23 7l-7 5 7 5V7z"></path>
+            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+          </svg>
+        </button>
+        <input type="text" id="chatWidgetInput" placeholder="Digite sua mensagem...">
+        <button id="chatWidgetSend" class="chat-widget-send-btn" onclick="sendChatMessage()" title="Enviar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#0b0e17">
+            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="chat-widget-footer">Ao continuar, você concorda com nossa Política de Privacidade.</div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS DO PERFIL, FAQ E CÂMERA -->
+  <script>
+    // FUNÇÕES DO MODAL DE PERFIL DO USUÁRIO
+    function openUserProfileModal() {
+      const modal = document.getElementById("userProfileModal");
+      if (modal) modal.classList.add("active");
+    }
+
+    function closeUserProfileModal() {
+      const modal = document.getElementById("userProfileModal");
+      if (modal) modal.classList.remove("active");
+      cancelProfileEdit();
+    }
+
+    function closeProfileOnOverlay(event) {
+      if (event.target.id === "userProfileModal") {
+        closeUserProfileModal();
+      }
+    }
+
+    function enableProfileEdit() {
+      document.getElementById("profileViewMode").style.display = "none";
+      document.getElementById("profileEditMode").style.display = "block";
+    }
+
+    function cancelProfileEdit() {
+      document.getElementById("profileEditMode").style.display = "none";
+      document.getElementById("profileViewMode").style.display = "block";
+    }
+
+    function saveProfileChanges() {
+      const newName = document.getElementById("profileNameInput").value.trim();
+      const newEmail = document.getElementById("profileEmailInput").value.trim();
+      const newCourse = document.getElementById("profileCourseInput").value.trim();
+
+      if (newName) {
+        document.getElementById("profileNameView").textContent = newName;
+        // Atualiza iniciais do avatar
+        const initials = newName.split(" ").map(n => n[0]).slice(0,2).join("").toUpperCase();
+        document.getElementById("profileAvatarView").textContent = initials;
+        document.getElementById("profileAvatarEdit").textContent = initials;
+        const headerAvatar = document.getElementById("headerUserAvatar");
+        if (headerAvatar) headerAvatar.textContent = initials;
+      }
+      if (newEmail) document.getElementById("profileEmailView").textContent = newEmail;
+      if (newCourse) document.getElementById("profileCourseView").textContent = newCourse;
+
+      cancelProfileEdit();
+    }
+
+    // FUNÇÃO DA FAQ (ACORDEÃO)
+    function toggleFaq(item) {
+      const answer = item.querySelector('.faq-answer');
+      const isActive = item.classList.contains('active');
+
+      document.querySelectorAll('.faq-item').forEach(el => {
+        el.classList.remove('active');
+        const a = el.querySelector('.faq-answer');
+        if (a) a.style.maxHeight = null;
+      });
+
+      if (!isActive) {
+        item.classList.add('active');
+        if (answer) {
+          answer.style.maxHeight = answer.scrollHeight + "px";
+        }
+      }
+    }
+
+    // LÓGICA DO CHATBOT E CÂMERA DE VÍDEO
+    var localStream = null;
+    var simulatedInterval = null;
+
+    async function toggleVideoCall() {
+      var videoArea = document.getElementById("chatVideoArea");
+      var videoPreview = document.getElementById("chatVideoPreview");
+      var messages = document.getElementById("chatWidgetMessages");
+
+      if (!videoArea || !videoPreview) return;
+
+      if (localStream || videoArea.style.display === "block") {
+        endVideoCall();
+        return;
+      }
+
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        try {
+          localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+          videoPreview.srcObject = localStream;
+          videoPreview.style.display = "block";
+          videoArea.style.display = "block";
+
+          if (messages) {
+            var botBubble = document.createElement("div");
+            botBubble.className = "chat-bubble bot";
+            botBubble.textContent = "Chamada de vídeo iniciada. Conectado ao mentor em tempo real.";
+            messages.appendChild(botBubble);
+            messages.scrollTop = messages.scrollHeight;
+          }
+          return;
+        } catch (err) {
+          console.warn("Acesso à câmera real não liberado, ativando transmissão animada...", err);
+        }
+      }
+
+      // MODO SIMULAÇÃO DE VÍDEO
+      videoArea.style.display = "block";
+      videoPreview.style.display = "none";
+
+      var canvas = document.createElement("canvas");
+      canvas.width = 320;
+      canvas.height = 180;
+      canvas.id = "simulatedVideoCanvas";
+      canvas.style.width = "100%";
+      canvas.style.borderRadius = "10px";
+      canvas.style.maxHeight = "160px";
+
+      var existingCanvas = document.getElementById("simulatedVideoCanvas");
+      if (existingCanvas) existingCanvas.remove();
+
+      videoArea.insertBefore(canvas, videoArea.firstChild);
+      var ctx = canvas.getContext("2d");
+
+      var pulse = 0;
+      simulatedInterval = setInterval(function() {
+        pulse += 0.05;
+        var opacity = 0.8 + Math.sin(pulse) * 0.2;
+
+        ctx.fillStyle = "#0f172a";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = "#DDAA55";
+        ctx.beginPath();
+        ctx.arc(160, 65, 26, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "bold 13px system-ui, sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("Vídeo Ao Vivo com Mentor Inspira", 160, 120);
+
+        ctx.fillStyle = "rgba(16, 185, 129, " + opacity + ")";
+        ctx.font = "bold 11px system-ui, sans-serif";
+        ctx.fillText("Transmissão HD Conectada", 160, 145);
+      }, 80);
+
+      if (messages) {
+        var botBubble = document.createElement("div");
+        botBubble.className = "chat-bubble bot";
+        botBubble.textContent = "Chamada de vídeo iniciada (Transmissão de Vídeo HD).";
+        messages.appendChild(botBubble);
+        messages.scrollTop = messages.scrollHeight;
+      }
+    }
+
+    function endVideoCall() {
+      var videoArea = document.getElementById("chatVideoArea");
+      var videoPreview = document.getElementById("chatVideoPreview");
+      var messages = document.getElementById("chatWidgetMessages");
+
+      if (localStream) {
+        localStream.getTracks().forEach(function(track) {
+          track.stop();
+        });
+        localStream = null;
+      }
+
+      if (simulatedInterval) {
+        clearInterval(simulatedInterval);
+        simulatedInterval = null;
+      }
+
+      var simulatedCanvas = document.getElementById("simulatedVideoCanvas");
+      if (simulatedCanvas) simulatedCanvas.remove();
+
+      if (videoPreview) {
+        videoPreview.srcObject = null;
+        videoPreview.style.display = "block";
+      }
+
+      if (videoArea) {
+        videoArea.style.display = "none";
+      }
+
+      if (messages) {
+        var botBubble = document.createElement("div");
+        botBubble.className = "chat-bubble bot";
+        botBubble.textContent = "Chamada de vídeo encerrada.";
+        messages.appendChild(botBubble);
+        messages.scrollTop = messages.scrollHeight;
+      }
+    }
+
+    function toggleChatWidget() {
+      var panel = document.getElementById("chatWidgetPanel");
+      if (!panel) return;
+      panel.classList.toggle("active");
+    }
+
+    function sendChatMessage() {
+      var input = document.getElementById("chatWidgetInput");
+      var messages = document.getElementById("chatWidgetMessages");
+      if (!input || !messages) return;
+      
+      var text = input.value.trim();
+      if (!text) return;
+
+      var userBubble = document.createElement("div");
+      userBubble.className = "chat-bubble user";
+      userBubble.textContent = text;
+      messages.appendChild(userBubble);
+
+      input.value = "";
+      messages.scrollTop = messages.scrollHeight;
+
+      setTimeout(function() {
+        var botBubble = document.createElement("div");
+        botBubble.className = "chat-bubble bot";
+        botBubble.textContent = "Entendi perfeitamente! Como posso te apoiar com essa dúvida?";
+        messages.appendChild(botBubble);
+        messages.scrollTop = messages.scrollHeight;
+      }, 700);
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      var chatInput = document.getElementById("chatWidgetInput");
+      if (chatInput) {
+        chatInput.addEventListener("keydown", function(e) {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            sendChatMessage();
+          }
+        });
+      }
+    });
+  </script>
+
+  <!-- ARQUIVOS JAVASCRIPT EXTERNOS -->
+  <script src="js/como-funciona.js"></script>
+  <script src="js/profile-modal.js"></script>
+  <script src="js/theme-toggle.js"></script>
+</body>
+</html>

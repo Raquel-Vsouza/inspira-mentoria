@@ -1,0 +1,59 @@
+<!-- MODAL DE TESTE VOCACIONAL -->
+    <div class="modal-overlay" id="testeVocacionalModal" onclick="if(event.target === this) tvCloseModal()">
+      <div class="modal-content" style="max-width: 460px;">
+
+        <!-- Tela de Escolha: Rápido x Personalizado -->
+        <div id="tvChoiceScreen">
+          <p class="tv-choice-eyebrow"><strong>5 perguntas</strong> ou um diagnóstico completo — você escolhe.</p>
+          <p class="tv-choice-desc">Descubra sua área ideal entre tecnologia, marketing, finanças e empreendedorismo.</p>
+
+          <div class="tv-choice-cards">
+            <button type="button" class="tv-choice-card" onclick="tvStartQuiz('rapido')">
+              <span class="tv-choice-icon">⚡</span>
+              <span class="tv-choice-text">
+                <span class="tv-choice-title">Rápido</span>
+                <span class="tv-choice-sub">5 perguntas · cerca de 1 minuto</span>
+              </span>
+            </button>
+            <button type="button" class="tv-choice-card" onclick="tvStartQuiz('personalizado')">
+              <span class="tv-choice-icon">🎯</span>
+              <span class="tv-choice-text">
+                <span class="tv-choice-title">Personalizado</span>
+                <span class="tv-choice-sub">10 perguntas · resultado mais detalhado</span>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tela de Quiz -->
+        <div id="tvQuizScreen" style="display: none;">
+          <div class="tv-step-label" id="tvStepLabel">Pergunta 1 de 5</div>
+          <div class="tv-progress-bar-wrap">
+            <div class="tv-progress-bar-fill" id="tvProgressFill"></div>
+          </div>
+
+          <h3 class="tv-question" id="tvQuestionText">Carregando pergunta...</h3>
+
+          <div class="tv-options" id="tvOptionsWrap"></div>
+
+          <div class="tv-back-row">
+            <button type="button" class="tv-link-btn" id="tvBackBtn" onclick="tvGoBack()">← Voltar</button>
+          </div>
+        </div>
+
+        <!-- Tela de Resultado -->
+        <div id="tvResultScreen" style="display: none;">
+          <div class="tv-result-wrap">
+            <div class="tv-result-icon">✓</div>
+            <div class="tv-result-eyebrow">RESULTADO DO TESTE</div>
+            <h3 class="tv-result-title" id="tvResultTitle">Título da Área</h3>
+            <p class="tv-result-desc" id="tvResultDesc">Descrição do resultado...</p>
+            <div class="tv-result-actions">
+              <button type="button" class="tv-option-btn" style="text-align: center; background: #E0B84A; color: #090c1b; font-weight: bold;" onclick="tvFindMentors()">Ver mentores recomendados</button>
+              <button type="button" class="tv-retry-btn" onclick="tvRetake()">Refazer teste</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>

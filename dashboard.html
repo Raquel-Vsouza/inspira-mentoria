@@ -3,19 +3,226 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inspira — Dashboard</title>
+  <title>Início</title>
+
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/chat-widget.css">
+  <link rel="stylesheet" href="css/vocacional.css">
+  <link rel="stylesheet" href="css/profile-modal.css">
+
+  <style>
+    .modal-overlay {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      background: rgba(11, 14, 23, 0.85) !important;
+      backdrop-filter: blur(8px) !important;
+      display: none;
+      align-items: center !important;
+      justify-content: center !important;
+      z-index: 100000 !important;
+      padding: 20px !important;
+    }
+
+    .modal-overlay.active {
+      display: flex !important;
+    }
+
+    .profile-modal-box {
+      background: #0e1329 !important;
+      border: 1px solid #262b3a !important;
+      border-radius: 20px !important;
+      padding: 32px !important;
+      width: 420px !important;
+      max-width: 100% !important;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8) !important;
+      position: relative !important;
+      text-align: center !important;
+      color: #f0f2f5 !important;
+      animation: modalFadeIn 0.3s ease-out !important;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.95) translateY(-10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .modal-close {
+      position: absolute !important;
+      top: 16px !important;
+      right: 16px !important;
+      background: rgba(255, 255, 255, 0.05) !important;
+      border: 1px solid #262b3a !important;
+      color: #94a3b8 !important;
+      width: 32px !important;
+      height: 32px !important;
+      border-radius: 50% !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      cursor: pointer !important;
+      transition: all 0.2s ease !important;
+    }
+
+    .modal-close:hover {
+      background: rgba(239, 68, 68, 0.2) !important;
+      color: #ef4444 !important;
+      border-color: #ef4444 !important;
+    }
+
+    .profile-modal-title {
+      font-size: 1.4rem !important;
+      font-weight: 700 !important;
+      color: #ffffff !important;
+      margin-bottom: 20px !important;
+    }
+
+    .profile-avatar-wrap {
+      display: flex !important;
+      justify-content: center !important;
+      margin-bottom: 16px !important;
+    }
+
+    .profile-avatar {
+      width: 76px !important;
+      height: 76px !important;
+      background: #DDAA55 !important;
+      color: #0b0e17 !important;
+      font-size: 1.8rem !important;
+      font-weight: bold !important;
+      border-radius: 50% !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      border: 3px solid rgba(221, 170, 85, 0.3) !important;
+      box-shadow: 0 4px 20px rgba(221, 170, 85, 0.25) !important;
+    }
+
+    .profile-name {
+      font-size: 1.2rem !important;
+      font-weight: 700 !important;
+      color: #ffffff !important;
+      margin-bottom: 4px !important;
+    }
+
+    .profile-role {
+      font-size: 0.8rem !important;
+      color: #DDAA55 !important;
+      margin-bottom: 20px !important;
+      font-weight: 700 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 1px !important;
+    }
+
+    .profile-info-box {
+      background: #1c2333 !important;
+      border: 1px solid #262b3a !important;
+      border-radius: 12px !important;
+      padding: 18px !important;
+      text-align: left !important;
+      margin-bottom: 24px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 12px !important;
+    }
+
+    .profile-field-label {
+      font-size: 0.75rem !important;
+      font-weight: 700 !important;
+      color: #94a3b8 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.5px !important;
+      margin-bottom: 2px !important;
+    }
+
+    .profile-field-value {
+      font-size: 0.95rem !important;
+      color: #f0f2f5 !important;
+      font-weight: 500 !important;
+    }
+
+    .profile-status {
+      font-size: 0.9rem !important;
+      color: #10b981 !important;
+      font-weight: 600 !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+    }
+
+    .profile-status .status-dot {
+      width: 8px !important;
+      height: 8px !important;
+      background: #10b981 !important;
+      border-radius: 50% !important;
+      display: inline-block !important;
+    }
+
+    .profile-input {
+      width: 100% !important;
+      padding: 10px 14px !important;
+      background: #0e1329 !important;
+      border: 1px solid #262b3a !important;
+      border-radius: 8px !important;
+      color: #fff !important;
+      font-size: 0.9rem !important;
+      outline: none !important;
+    }
+
+    .profile-input:focus {
+      border-color: #DDAA55 !important;
+    }
+
+    .profile-actions {
+      display: flex !important;
+      gap: 12px !important;
+    }
+
+    .profile-btn-primary {
+      flex: 1 !important;
+      background: #DDAA55 !important;
+      color: #0b0e17 !important;
+      border: none !important;
+      padding: 12px !important;
+      border-radius: 10px !important;
+      font-weight: 700 !important;
+      font-size: 0.9rem !important;
+      cursor: pointer !important;
+      transition: opacity 0.2s ease !important;
+    }
+
+    .profile-btn-primary:hover {
+      opacity: 0.9 !important;
+    }
+
+    .profile-btn-secondary {
+      flex: 1 !important;
+      background: rgba(239, 68, 68, 0.1) !important;
+      color: #ef4444 !important;
+      border: 1px solid rgba(239, 68, 68, 0.3) !important;
+      padding: 12px !important;
+      border-radius: 10px !important;
+      font-weight: 600 !important;
+      font-size: 0.9rem !important;
+      cursor: pointer !important;
+      transition: all 0.2s ease !important;
+    }
+
+    .profile-btn-secondary:hover {
+      background: #ef4444 !important;
+      color: #ffffff !important;
+    }
+  </style>
 </head>
 <body class="dark-mode dashboard-body">
 
-  <!-- BARRA DE NAVEGAÇÃO SUPERIOR -->
   <header class="dash-header">
-    
-    <!-- Lado Esquerdo: Logo e Ícone lado a lado -->
     <div class="dash-logo-area">
       <div class="header-brand-icon">
-        <svg viewBox="0 0 300 300" width="100%" height="100%">
+        <svg viewBox="0 0 300 300" width="40" height="40">
           <ellipse cx="150" cy="160" rx="140" ry="40" fill="none" stroke="rgba(221, 170, 85, 0.4)" stroke-width="3" transform="rotate(-15 150 160)" />
           <polygon points="60,230 240,230 150,70" fill="#152E2E" />
           <polygon points="80,230 220,230 150,90" fill="#2B625C" />
@@ -26,20 +233,16 @@
       <span class="dash-logo-text">inspira</span>
     </div>
     
-    <!-- Centro: Menu de Navegação -->
     <nav class="dash-nav">
-      <a href="#" class="active">Início</a>
-      <a href="#">Encontrar Mentor</a>
-      <a href="#">Como funciona</a>
-      <a href="#">Áreas</a>
-      <a href="#">Recursos</a>
+      <a href="dashboard.html" class="active">Início</a>
+      <a href="como-funciona.html">Como funciona</a>
+      <a href="recursos.html">Recursos</a>
     </nav>
     
-    <!-- Lado Direito: Perfil e Botão de Tema Unificado -->
     <div class="dash-header-right">
-      <div class="dash-user-profile">
-        <span class="user-name">Raquel Vitória</span>
-        <div class="user-avatar">RV</div>
+      <div class="dash-user-profile" onclick="openUserProfileModal()" title="Ver Perfil">
+        <span class="user-name">Raquel Vitória de Souza</span>
+        <div class="user-avatar" id="headerUserAvatar">RV</div>
       </div>
       
       <button class="theme-toggle-dash" id="themeToggleBtn" title="Alternar Modo Escuro">
@@ -47,44 +250,32 @@
           <circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
         </svg>
       </button>
-    </div>
 
+      <button class="theme-toggle-dash" title="Sair">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line>
+        </svg>
+      </button>
+    </div>
   </header>
 
-  <!-- CONTEÚDO PRINCIPAL DO DASHBOARD -->
   <main class="dashboard-main">
 
-    <!-- HERO SECTION DO DASHBOARD -->
     <section class="dash-hero-banner">
       <div class="dash-hero-content">
         <span class="tag-transform">✦ MENTORIA QUE TRANSFORMA</span>
         <h1>Seu futuro começa com a conexão certa.</h1>
         <p>Encontre o mentor ideal e caminhe ao lado de quem já conquistou o futuro que você deseja.</p>
         <div class="dash-actions">
-          <button class="btn-primary" style="width: auto; padding: 12px 24px;">Encontrar um mentor →</button>
-          <button class="btn-outline">Quero ser mentor</button>
+          <a href="mentores.html" class="btn-primary" style="width: auto; padding: 12px 24px; text-decoration: none; display: inline-block; text-align: center;">Encontrar um mentor →</a>
+          <button class="btn-outline" onclick="openMentorFormModal()">Quero ser mentor</button>
         </div>
       </div>
     </section>
 
-    <!-- GRID DE CARDS PRINCIPAIS -->
     <div class="dash-grid-cards">
 
-      <!-- Card 1: Inspira AI -->
-      <div class="dash-card ai-card">
-        <div class="card-header-badge">
-          <h3>Inspira AI</h3>
-          <span class="badge-novo">NOVO</span>
-        </div>
-        <p class="card-desc">Sua IA de carreira 24/7. Converse por mensagem ou voz sobre dúvidas e próximos passos.</p>
-        <div class="ai-box-interactive">
-          <input type="text" placeholder="Falar com a IA ou digitar mensagem..." class="ai-input">
-          <button class="ai-send-btn">→</button>
-        </div>
-      </div>
-
-      <!-- Card 2: Teste Vocacional -->
-      <div class="dash-card">
+      <div class="dash-card" id="iwTesteVocacionalCard">
         <h3>Teste Vocacional</h3>
         <p class="card-desc">Descubra suas habilidades, interesses e o caminho ideal para o seu futuro.</p>
         <ul class="card-list-info">
@@ -92,11 +283,10 @@
           <li>✓ 100% online</li>
           <li>✓ Resultado personalizado</li>
         </ul>
-        <button class="btn-secondary-dash">Fazer teste →</button>
+        <button class="btn-secondary-dash" onclick="tvOpenModal()">Fazer teste →</button>
       </div>
 
-      <!-- Card 3: Calendário -->
-      <div class="dash-card">
+      <div class="dash-card" id="iwCalendarioCard">
         <h3>Calendário</h3>
         <p class="card-desc">Organize seus compromissos e nunca perca uma mentoria.</p>
         <div class="calendar-preview">
@@ -108,12 +298,11 @@
         <button class="btn-secondary-dash" id="openCalendarBtn" onclick="document.getElementById('calendarModal').classList.add('active')">Ver calendário e agendar →</button>
       </div>
 
-      <!-- Card 4: Plano de Evolução -->
-      <div class="dash-card evolution-card">
+      <div class="dash-card evolution-card" id="iwPlanoEvolucaoCard">
         <h3>Plano de Evolução</h3>
         <p class="card-desc">Acompanhe seu progresso, defina metas e conquiste novos níveis.</p>
         <div class="evolution-progress-wrap">
-          <div class="progress-circle">65%</div>
+          <div class="progress-circle" id="mainCardProgress">0%</div>
         </div>
         <div class="evolution-steps">
           <span class="dot active"></span>
@@ -122,20 +311,17 @@
           <span class="dot"></span>
           <span class="dot"></span>
         </div>
-        <button class="btn-secondary-dash">Ver meu plano →</button>
+        <button class="btn-secondary-dash" onclick="openEvolutionModal()">Ver meu plano →</button>
       </div>
 
-    </div> <!-- Fim da grid de cards -->
+    </div>
 
-    <!-- SEÇÃO: MENTORES EM DESTAQUE -->
     <section class="mentors-section">
       <div class="section-title-wrap">
         <h2>Mentores em destaque</h2>
-        <a href="#" class="link-see-all">Ver todos os mentores →</a>
       </div>
 
       <div class="mentors-grid">
-        <!-- Mentor 1 -->
         <div class="mentor-card">
           <div class="mentor-info">
             <h4>Carlos Almeida</h4>
@@ -148,7 +334,6 @@
           </div>
         </div>
 
-        <!-- Mentor 2 -->
         <div class="mentor-card">
           <div class="mentor-info">
             <h4>Juliana Martins</h4>
@@ -161,7 +346,6 @@
           </div>
         </div>
 
-        <!-- Mentor 3 -->
         <div class="mentor-card">
           <div class="mentor-info">
             <h4>Rafael Oliveira</h4>
@@ -174,7 +358,6 @@
           </div>
         </div>
 
-        <!-- Mentor 4 -->
         <div class="mentor-card">
           <div class="mentor-info">
             <h4>Camila Rocha</h4>
@@ -189,51 +372,348 @@
       </div>
     </section>
 
-    <!-- MODAL DE CALENDÁRIO / AGENDAMENTO -->
-    <div class="modal-overlay" id="calendarModal" onclick="if(event.target === this) this.classList.remove('active')">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>Agenda de Mentores Disponíveis</h3>
-          <button class="close-modal-btn" id="closeModalBtn" onclick="document.getElementById('calendarModal').classList.remove('active')">&times;</button>
+  </main>
+
+  <div class="modal-overlay" id="userProfileModal" onclick="closeProfileOnOverlay(event)">
+    <div class="modal-box profile-modal-box">
+      <button class="modal-close" onclick="closeUserProfileModal()" aria-label="Fechar">&times;</button>
+
+      <h2 class="profile-modal-title">Perfil do Usuário</h2>
+
+      <div id="profileViewMode">
+        <div class="profile-avatar-wrap">
+          <div class="profile-avatar" id="profileAvatarView">RV</div>
         </div>
-        
-        <div class="modal-body">
-          <p class="modal-subtitle">Escolha um profissional, selecione um horário livre e confirme seu agendamento:</p>
-          
-          <div class="field-modal">
-            <label>Profissional / Mentor</label>
-            <select id="mentorSelect" class="modal-select">
-              <option value="carlos">Carlos Almeida — Tecnologia (CEO TechVision)</option>
-              <option value="juliana">Juliana Martins — Finanças (Diretora Financeira)</option>
-              <option value="rafael">Rafael Oliveira — Empreendedorismo</option>
-              <option value="camila">Camila Rocha — Marketing (Head de Marketing)</option>
-            </select>
+        <p class="profile-name" id="profileNameView">Raquel Vitória de Souza</p>
+        <p class="profile-role">Aluna / Mentorada</p>
+
+        <div class="profile-info-box">
+          <div>
+            <p class="profile-field-label">E-MAIL</p>
+            <p class="profile-field-value" id="profileEmailView">raquel.vitoria@exemplo.com</p>
           </div>
 
-          <div class="field-modal">
-            <label>Horários Livres na Semana</label>
-            <div class="slots-grid">
-              <button type="button" class="time-slot" onclick="document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('active-slot')); this.classList.add('active-slot');" data-time="15 Mai - 14:00">15 Mai às 14:00</button>
-              <button type="button" class="time-slot active-slot" onclick="document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('active-slot')); this.classList.add('active-slot');" data-time="15 Mai - 16:00">15 Mai às 16:00</button>
-              <button type="button" class="time-slot" onclick="document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('active-slot')); this.classList.add('active-slot');" data-time="16 Mai - 10:00">16 Mai às 10:00</button>
-              <button type="button" class="time-slot" onclick="document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('active-slot')); this.classList.add('active-slot');" data-time="17 Mai - 15:30">17 Mai às 15:30</button>
-            </div>
+          <div>
+            <p class="profile-field-label">CURSO</p>
+            <p class="profile-field-value" id="profileCourseView">Análise e Desenvolvimento de Sistemas</p>
           </div>
 
-          <button class="btn-primary" id="confirmBookingBtn" style="width: 100%; margin-top: 20px;" onclick="
-            const sel = document.getElementById('mentorSelect');
-            const mentor = sel ? sel.options[sel.selectedIndex].text.split('—')[0].trim() : 'Mentor';
-            const activeSlot = document.querySelector('.time-slot.active-slot');
-            const timeText = activeSlot ? activeSlot.getAttribute('data-time') : 'Horário selecionado';
-            alert('Mentoria agendada com sucesso!\n\nProfissional: ' + mentor + '\nHorário: ' + timeText);
-            document.getElementById('calendarModal').classList.remove('active');
-          ">Confirmar Agendamento</button>
+          <div>
+            <p class="profile-field-label">STATUS DA CONTA</p>
+            <p class="profile-status"><span class="status-dot"></span>Ativa</p>
+          </div>
+        </div>
+
+        <div class="profile-actions">
+          <button class="profile-btn-primary" onclick="enableProfileEdit()">Editar Perfil</button>
+          <button class="profile-btn-secondary" onclick="closeUserProfileModal()">Sair</button>
+        </div>
+      </div>
+
+      <div id="profileEditMode" style="display: none;">
+        <div class="profile-avatar-wrap">
+          <div class="profile-avatar" id="profileAvatarEdit">RV</div>
+        </div>
+
+        <div class="profile-info-box" style="margin-top: 10px;">
+          <div>
+            <p class="profile-field-label">NOME COMPLETO</p>
+            <input type="text" class="profile-input" id="profileNameInput" value="Raquel Vitória de Souza">
+          </div>
+
+          <div>
+            <p class="profile-field-label">E-MAIL</p>
+            <input type="email" class="profile-input" id="profileEmailInput" value="raquel.vitoria@exemplo.com">
+          </div>
+
+          <div>
+            <p class="profile-field-label">CURSO</p>
+            <input type="text" class="profile-input" id="profileCourseInput" value="Análise e Desenvolvimento de Sistemas">
+          </div>
+        </div>
+
+        <div class="profile-actions">
+          <button class="profile-btn-primary" onclick="saveProfileChanges()">Salvar Alterações</button>
+          <button class="profile-btn-secondary" onclick="cancelProfileEdit()">Cancelar</button>
         </div>
       </div>
     </div>
-    
-  </main>
+  </div>
 
+  <div class="modal-overlay" id="calendarModal" onclick="if(event.target === this) this.classList.remove('active')">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Agenda de Mentores Disponíveis</h3>
+        <button class="close-modal-btn" id="closeModalBtn" onclick="document.getElementById('calendarModal').classList.remove('active')">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <p class="modal-subtitle">Escolha um profissional, selecione um horário livre e confirme seu agendamento:</p>
+        
+        <div class="field-modal">
+          <label>Profissional / Mentor</label>
+          <select id="mentorSelect" class="modal-select">
+            <option value="carlos">Carlos Almeida — Tecnologia (CEO TechVision)</option>
+            <option value="juliana">Juliana Martins — Finanças (Diretora Financeira)</option>
+            <option value="rafael">Rafael Oliveira — Empreendedorismo</option>
+            <option value="camila">Camila Rocha — Marketing (Head de Marketing)</option>
+          </select>
+        </div>
+
+        <div class="field-modal">
+          <label>Horários Livres na Semana</label>
+          <div class="slots-grid">
+            <button type="button" class="time-slot" onclick="document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('active-slot')); this.classList.add('active-slot');" data-time="15 Mai - 14:00">15 Mai às 14:00</button>
+            <button type="button" class="time-slot active-slot" onclick="document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('active-slot')); this.classList.add('active-slot');" data-time="15 Mai - 16:00">15 Mai às 16:00</button>
+            <button type="button" class="time-slot" onclick="document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('active-slot')); this.classList.add('active-slot');" data-time="16 Mai - 10:00">16 Mai às 10:00</button>
+            <button type="button" class="time-slot" onclick="document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('active-slot')); this.classList.add('active-slot');" data-time="17 Mai - 15:30">17 Mai às 15:30</button>
+          </div>
+        </div>
+
+        <button class="btn-primary" id="confirmBookingBtn" style="width: 100%; margin-top: 20px;" onclick="
+          const sel = document.getElementById('mentorSelect');
+          const mentor = sel ? sel.options[sel.selectedIndex].text.split('—')[0].trim() : 'Mentor';
+          const activeSlot = document.querySelector('.time-slot.active-slot');
+          const timeText = activeSlot ? activeSlot.getAttribute('data-time') : 'Horário selecionado';
+          alert('Mentoria agendada com sucesso!\n\nProfissional: ' + mentor + '\nHorário: ' + timeText);
+          document.getElementById('calendarModal').classList.remove('active');
+        ">Confirmar Agendamento</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="testeVocacionalModal" onclick="if(event.target === this) tvCloseModal()">
+    <div class="modal-content" style="max-width: 460px;">
+      <div id="tvChoiceScreen">
+        <p class="tv-choice-eyebrow"><strong>5 perguntas</strong> ou um diagnóstico completo — você escolhe.</p>
+        <p class="tv-choice-desc">Descubra sua área ideal entre tecnologia, marketing, finanças e empreendedorismo.</p>
+
+        <div class="tv-choice-cards">
+          <button type="button" class="tv-choice-card" onclick="tvStartQuiz('rapido')">
+            <span class="tv-choice-icon">⚡</span>
+            <span class="tv-choice-text">
+              <span class="tv-choice-title">Rápido</span>
+              <span class="tv-choice-sub">5 perguntas · cerca de 1 minuto</span>
+            </span>
+          </button>
+          <button type="button" class="tv-choice-card" onclick="tvStartQuiz('personalizado')">
+            <span class="tv-choice-icon">🎯</span>
+            <span class="tv-choice-text">
+              <span class="tv-choice-title">Personalizado</span>
+              <span class="tv-choice-sub">10 perguntas · resultado mais detalhado</span>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <div id="tvQuizScreen" style="display: none;">
+        <div class="tv-step-label" id="tvStepLabel">Pergunta 1 de 5</div>
+        <div class="tv-progress-bar-wrap">
+          <div class="tv-progress-bar-fill" id="tvProgressFill"></div>
+        </div>
+        <h3 class="tv-question" id="tvQuestionText">Carregando pergunta...</h3>
+        <div class="tv-options" id="tvOptionsWrap"></div>
+        <div class="tv-back-row">
+          <button type="button" class="tv-link-btn" id="tvBackBtn" onclick="tvGoBack()">← Voltar</button>
+        </div>
+      </div>
+
+      <div id="tvResultScreen" style="display: none;">
+        <div class="tv-result-wrap">
+          <div class="tv-result-icon">✓</div>
+          <div class="tv-result-eyebrow">RESULTADO DO TESTE</div>
+          <h3 class="tv-result-title" id="tvResultTitle">Título da Área</h3>
+          <p class="tv-result-desc" id="tvResultDesc">Descrição do resultado...</p>
+          <div class="tv-result-actions">
+            <button type="button" class="tv-option-btn" style="text-align: center; background: #E0B84A; color: #090c1b; font-weight: bold;" onclick="tvFindMentors()">Ver mentores recomendados</button>
+            <button type="button" class="tv-retry-btn" onclick="tvRetake()">Refazer teste</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="evolutionPlanModal" onclick="if(event.target === this) closeEvolutionModal()">
+    <div class="modal-content evolution-modal-content">
+      <div class="modal-header">
+        <h3>Plano de Evolução Detalhado</h3>
+        <button class="close-modal-btn" onclick="closeEvolutionModal()">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <p class="modal-subtitle">Acompanhe suas metas de carreira, progresso técnico e conquistas na plataforma Inspira.</p>
+        
+        <div class="evolution-top-row">
+          <div class="evolution-summary-box">
+            <div>
+              <span class="evolution-summary-eyebrow">Progresso Geral</span>
+              <h4 id="evolutionLevelText" class="evolution-summary-title">Nível 0 — Comece sua jornada</h4>
+            </div>
+            <div id="evolutionPercentage" class="evolution-percentage-badge">0%</div>
+          </div>
+          
+          <button class="evolution-reset-btn" onclick="resetEvolutionPlan()" title="Recomeçar plano e zerar progresso">
+            Recomeçar
+          </button>
+        </div>
+
+        <h4 class="evolution-steps-heading">Suas Metas e Trilha</h4>
+        <p class="evolution-steps-sub">Clique em qualquer etapa para alternar entre Concluída e Pendente.</p>
+        
+        <div id="evolutionStepsList" class="evolution-steps-list"></div>
+
+        <button class="btn-primary evolution-close-action" onclick="closeEvolutionModal()">Entendido</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="mentorFormModal" onclick="if(event.target === this) closeMentorFormModal()">
+    <div class="modal-content" style="max-width: 480px;">
+      <div class="modal-header">
+        <h3>Quero Ser Mentor</h3>
+        <button class="close-modal-btn" onclick="closeMentorFormModal()">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <p class="modal-subtitle">Compartilhe sua experiência e ajude a transformar a carreira de novos talentos.</p>
+        
+        <form id="mentorForm" onsubmit="handleMentorFormSubmit(event)">
+          <div class="field-modal" style="margin-bottom: 14px;">
+            <label style="font-size: 12px; color: #9ca3af; display: block; margin-bottom: 6px;">Nome Completo</label>
+            <input type="text" id="mentorName" class="profile-edit-input" placeholder="Seu nome" required style="width: 100%;">
+          </div>
+
+          <div class="field-modal" style="margin-bottom: 14px;">
+            <label style="font-size: 12px; color: #9ca3af; display: block; margin-bottom: 6px;">E-mail Profissional</label>
+            <input type="email" id="mentorEmail" class="profile-edit-input" placeholder="seu.email@exemplo.com" required style="width: 100%;">
+          </div>
+
+          <div class="field-modal" style="margin-bottom: 14px;">
+            <label style="font-size: 12px; color: #9ca3af; display: block; margin-bottom: 6px;">Área de Atuação / Especialidade</label>
+            <select id="mentorArea" class="modal-select" required>
+              <option value="" disabled selected>Selecione sua área</option>
+              <option value="tecnologia">Tecnologia & Desenvolvimento</option>
+              <option value="financas">Finanças & Gestão</option>
+              <option value="empreendedorismo">Empreendedorismo & Negócios</option>
+              <option value="marketing">Marketing & Growth</option>
+              <option value="ux">UX / UI Design</option>
+            </select>
+          </div>
+
+          <div class="field-modal" style="margin-bottom: 14px;">
+            <label style="font-size: 12px; color: #9ca3af; display: block; margin-bottom: 6px;">Anos de Experiência</label>
+            <input type="number" id="mentorExp" class="profile-edit-input" placeholder="Ex: 8" min="1" required style="width: 100%;">
+          </div>
+
+          <div class="field-modal" style="margin-bottom: 20px;">
+            <label style="font-size: 12px; color: #9ca3af; display: block; margin-bottom: 6px;">LinkedIn ou Link profissional</label>
+            <input type="url" id="mentorLink" class="profile-edit-input" placeholder="https://linkedin.com/in/seu-perfil" required style="width: 100%;">
+          </div>
+
+          <button type="submit" class="btn-primary" style="width: 100%;">Enviar Inscrição</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <button id="chatWidgetToggle" class="chat-widget-toggle" onclick="toggleChatWidget()" title="Falar com a Inspira AI">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="#0b0e17">
+      <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+    </svg>
+  </button>
+
+  <div id="chatWidgetPanel" class="chat-widget-panel">
+    <div class="chat-widget-header">
+      <div>
+        <div class="chat-widget-title">Inspira AI</div>
+        <div class="chat-widget-status"><span class="status-dot"></span> Online agora</div>
+      </div>
+      <button id="chatWidgetClose" class="chat-widget-close" onclick="toggleChatWidget()" title="Fechar">&times;</button>
+    </div>
+
+    <div id="chatWidgetMessages" class="chat-widget-messages">
+      <div class="chat-bubble bot">Olá, Raquel! Sou a Inspira AI. Como posso ajudar você hoje?</div>
+    </div>
+
+    <div id="chatVideoArea" class="chat-video-area" style="display: none; padding: 12px 16px; border-top: 1px solid #262b3a; background: #0c1022;">
+      <video id="chatVideoPreview" autoplay muted playsinline style="width: 100%; border-radius: 10px; background: #000; max-height: 160px; object-fit: cover;"></video>
+      <button id="chatVideoEnd" onclick="endVideoCall()" style="margin-top: 8px; width: 100%; background: #ef4444; color: #fff; border: none; padding: 8px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer;">Encerrar chamada de vídeo</button>
+    </div>
+
+    <div class="chat-widget-input-wrapper">
+      <div class="chat-widget-input-area">
+        <button id="chatVideoBtn" class="chat-widget-icon-btn" onclick="toggleVideoCall()" title="Iniciar Chamada de Vídeo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#DDAA55" stroke-width="2">
+            <path d="M23 7l-7 5 7 5V7z"></path>
+            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+          </svg>
+        </button>
+        <input type="text" id="chatWidgetInput" placeholder="Digite sua mensagem...">
+        <button id="chatWidgetSend" class="chat-widget-send-btn" onclick="sendChatMessage()" title="Enviar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#0b0e17">
+            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="chat-widget-footer">Ao continuar, você concorda com nossa Política de Privacidade.</div>
+    </div>
+  </div>
+
+  <script>
+    function openUserProfileModal() {
+      const modal = document.getElementById("userProfileModal");
+      if (modal) modal.classList.add("active");
+    }
+
+    function closeUserProfileModal() {
+      const modal = document.getElementById("userProfileModal");
+      if (modal) modal.classList.remove("active");
+      cancelProfileEdit();
+    }
+
+    function closeProfileOnOverlay(event) {
+      if (event.target.id === "userProfileModal") {
+        closeUserProfileModal();
+      }
+    }
+
+    function enableProfileEdit() {
+      document.getElementById("profileViewMode").style.display = "none";
+      document.getElementById("profileEditMode").style.display = "block";
+    }
+
+    function cancelProfileEdit() {
+      document.getElementById("profileEditMode").style.display = "none";
+      document.getElementById("profileViewMode").style.display = "block";
+    }
+
+    function saveProfileChanges() {
+      const newName = document.getElementById("profileNameInput").value.trim();
+      const newEmail = document.getElementById("profileEmailInput").value.trim();
+      const newCourse = document.getElementById("profileCourseInput").value.trim();
+
+      if (newName) {
+        document.getElementById("profileNameView").textContent = newName;
+        const initials = newName.split(" ").map(n => n[0]).slice(0, 2).join("").toUpperCase();
+        
+        document.getElementById("profileAvatarView").textContent = initials;
+        document.getElementById("profileAvatarEdit").textContent = initials;
+        
+        const headerAvatar = document.getElementById("headerUserAvatar");
+        if (headerAvatar) headerAvatar.textContent = initials;
+      }
+      
+      if (newEmail) document.getElementById("profileEmailView").textContent = newEmail;
+      if (newCourse) document.getElementById("profileCourseView").textContent = newCourse;
+
+      cancelProfileEdit();
+    }
+  </script>
+
+  <script src="js/profile-modal.js"></script>
+  <script src="js/chat-widget.js"></script>
   <script src="js/script.js"></script>
+  <script src="js/vocacional.js"></script>
+  <script src="js/evolution.js"></script>
 </body>
 </html>

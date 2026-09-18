@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Encontre um mentor - Inspira</title>
+<link rel="stylesheet" href="css/como-funciona.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: #0b0e17;
+    color: #f0f2f5;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  .page-container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Header com Logo Inspira Alinhado */
+  .dash-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 32px;
+    background-color: #0e1329;
+    border-bottom: 1px solid #262b3a;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .dash-header-inner {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .dash-logo-area { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+  .header-brand-icon { width: 36px; height: 36px; display: flex; align-items: center; }
+  .dash-logo-text { font-size: 22px; font-weight: bold; letter-spacing: -0.5px; color: #fff; text-transform: lowercase; }
+
+  .dash-nav { display: flex; gap: 28px; }
+  .dash-nav a { text-decoration: none; color: #9aa3af; font-size: 14px; font-weight: 500; transition: color .2s; }
+  .dash-nav a:hover, .dash-nav a.active { color: #DDAA55; }
+
+  .dash-header-right { display: flex; align-items: center; gap: 16px; }
+  .dash-user-profile {
+    display: flex; align-items: center; gap: 10px; cursor: pointer;
+    background: rgba(255,255,255,.04); padding: 6px 12px; border-radius: 20px;
+    border: 1px solid #262b3a; transition: background .2s;
+  }
+  .dash-user-profile:hover { background: rgba(221, 170, 85, 0.12); }
+  .user-name { font-size: 13px; font-weight: 600; color: #fff; }
+  .user-avatar {
+    width: 32px; height: 32px; background: #DDAA55; color: #090c1b;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: bold;
+  }
+  .theme-toggle-dash {
+    background: rgba(255,255,255,.04); border: 1px solid #262b3a; color: #9aa3af;
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; cursor: pointer; transition: .2s;
+  }
+  .theme-toggle-dash:hover { color: #DDAA55; background: rgba(255,255,255,.06); }
+
+  main { padding-top: 40px; padding-bottom: 80px; }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: #DDAA55; font-size: .82rem; font-weight: 600;
+    margin-bottom: 14px;
+    background: rgba(221, 170, 85, 0.1); padding: 6px 12px; border-radius: 20px;
+  }
+  h1 { font-size: 2.1rem; margin-bottom: 10px; font-weight: 800; }
+  .subtitle { color: #9aa3af; margin-bottom: 26px; max-width: 560px; font-size: 15px; }
+
+  .search-wrap {
+    display: flex; align-items: center; gap: 10px;
+    background: #12151f; border: 1px solid #262b3a;
+    border-radius: 12px; padding: 14px 16px;
+    max-width: 560px; margin-bottom: 18px;
+  }
+  .search-wrap svg { color: #9aa3af; flex-shrink: 0; }
+  .search-wrap input {
+    background: transparent; border: none; outline: none;
+    color: #f0f2f5; font-size: .95rem; width: 100%;
+  }
+
+  .filters { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+  .filter-pill {
+    background: #12151f; border: 1px solid #262b3a; color: #cfd3dc;
+    border-radius: 30px; padding: 9px 16px; font-size: .85rem;
+    cursor: pointer; transition: .15s;
+  }
+  .filter-pill .count { opacity: .6; margin-left: 4px; }
+  .filter-pill.active { background: #DDAA55; color: #090c1b; border-color: #DDAA55; font-weight: 700; }
+  .filter-pill:hover:not(.active) { border-color: #3a4155; }
+
+  .sort-wrap { display: flex; align-items: center; gap: 8px; margin-bottom: 30px; flex-wrap: wrap; }
+  .sort-wrap label { font-size: .85rem; color: #9aa3af; }
+  .sort-select {
+    background: #12151f; border: 1px solid #262b3a; color: #f0f2f5;
+    border-radius: 8px; padding: 8px 10px; font-size: .88rem; cursor: pointer;
+  }
+
+  .grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  }
+  @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+
+  .card {
+    background: #12151f; border: 1px solid #1c202c; border-radius: 16px;
+    padding: 22px; position: relative; display: flex; flex-direction: column;
+    transition: .15s;
+  }
+  .card:hover { border-color: #DDAA55; transform: translateY(-2px); }
+  .card.featured { border-color: #DDAA55; box-shadow: 0 0 0 1px rgba(221,170,85,.15); }
+  .featured-tag {
+    position: absolute; top: -11px; left: 20px;
+    background: #DDAA55; color: #090c1b; font-size: .7rem; font-weight: 700;
+    padding: 3px 10px; border-radius: 20px;
+  }
+
+  .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: #262b3a; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: .85rem; flex-shrink: 0; color: #DDAA55;
+  }
+  .card-name { font-weight: 700; font-size: .98rem; }
+  .card-role { color: #9aa3af; font-size: .82rem; margin-top: 2px; }
+  .card-desc { color: #cfd3dc; font-size: .87rem; line-height: 1.5; margin-bottom: 14px; flex-grow: 1; }
+
+  .card-rating { display: flex; align-items: center; gap: 6px; color: #f0f2f5; font-weight: 600; font-size: .85rem; margin-bottom: 12px; }
+  .card-rating svg { color: #DDAA55; }
+
+  .tags-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .free-tag {
+    font-size: .72rem; font-weight: 600; color: #7fd8a0;
+    background: rgba(127,216,160,.12); border: 1px solid rgba(127,216,160,.3);
+    padding: 2px 9px; border-radius: 20px;
+  }
+  .availability { display: flex; align-items: center; gap: 5px; font-size: .78rem; color: #9aa3af; }
+  .availability .dot { width: 6px; height: 6px; border-radius: 50%; background: #4ADE80; display: inline-block; }
+
+  .card-btn {
+    background: #DDAA55; color: #090c1b; border: none; border-radius: 10px;
+    padding: 12px; font-weight: 700; font-size: .88rem; cursor: pointer; transition: .15s;
+  }
+  .card-btn:hover { background: #e8bc72; }
+
+  .no-results { text-align: center; color: #9aa3af; padding: 60px 0; display: none; }
+
+  /* Chat Flutuante */
+  .iw-fab {
+    position: fixed; bottom: 24px; right: 24px; width: 56px; height: 56px;
+    border-radius: 50%; background: #DDAA55; color: #090c1b; border: none;
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4); z-index: 9999; transition: transform 0.2s;
+  }
+  .iw-fab:hover { transform: scale(1.06); }
+
+  .iw-panel {
+    position: fixed; bottom: 86px; right: 24px; width: 350px; max-width: calc(100vw - 32px);
+    height: 490px; max-height: calc(100vh - 110px); background: #0b0f1d;
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 18px;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.6); display: none; flex-direction: column;
+    overflow: hidden; z-index: 10000;
+  }
+  .iw-panel.open { display: flex !important; }
+
+  .iw-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 20px; background: transparent; border-bottom: 1px solid rgba(255,255,255,0.05);
+    flex-shrink: 0;
+  }
+  .iw-title { font-size: 15px; font-weight: 700; color: #ffffff; }
+  .iw-status { font-size: 12px; color: #9ca3af; display: flex; align-items: center; gap: 6px; margin-top: 2px; }
+  .iw-status-dot { width: 7px; height: 7px; background: #10b981; border-radius: 50%; display: inline-block; }
+  .iw-close-btn { background: transparent; border: none; color: #6b7280; font-size: 20px; cursor: pointer; }
+
+  /* iw-chat-view precisa ser flex-column ocupando o painel inteiro:
+     assim só as mensagens (iw-body) rolam, e câmera + botão de encerrar +
+     campo de digitar ficam sempre fixos e visíveis embaixo. */
+  .iw-chat-view { display: flex; flex-direction: column; flex: 1; min-height: 0; overflow: hidden; }
+  .iw-body { flex: 1; min-height: 0; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+  .chat-bubble { max-width: 90%; padding: 12px 16px; border-radius: 14px; font-size: 13px; line-height: 1.5; white-space: pre-wrap !important; }
+  .chat-bubble.bot { background: rgba(255,255,255,0.06); color: #f3f4f6; border: 1px solid rgba(255,255,255,0.08); align-self: flex-start; }
+  .chat-bubble.user { background: #DDAA55; color: #090c1b; font-weight: 600; align-self: flex-end; }
+
+  #chatVideoArea { flex-shrink: 0; }
+  .iw-input-row { flex-shrink: 0; }
+
+  .iw-send-btn {
+    background: #DDAA55;
+    border: none;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background .15s;
+  }
+  .iw-send-btn:hover { background: #e8bc72; }
+  .iw-send-btn svg { position: relative; left: 1px; }
+
+  /* ---------------- MODAL DE AGENDAMENTO ---------------- */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(4, 6, 12, 0.72);
+    backdrop-filter: blur(2px);
+    align-items: center;
+    justify-content: center;
+    z-index: 20000;
+    padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+
+  .modal-box {
+    background: #12151f;
+    border: 1px solid #262b3a;
+    border-radius: 18px;
+    padding: 28px;
+    width: 100%;
+    max-width: 420px;
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,.5);
+  }
+
+  #modalScheduleView .avatar {
+    width: 56px; height: 56px; font-size: 1.1rem;
+    margin: 0 auto 14px auto;
+  }
+  #modalName { font-size: 1.15rem; font-weight: 800; margin-bottom: 4px; }
+  #modalRole { color: #9aa3af; font-size: .85rem; margin-bottom: 20px; }
+
+  .modal-label {
+    text-align: left; font-size: .78rem; font-weight: 700;
+    color: #9aa3af; text-transform: uppercase; letter-spacing: .04em;
+    margin: 18px 0 10px 0;
+  }
+
+  .modal-days, .modal-slots {
+    display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-start;
+    min-height: 20px;
+  }
+
+  .modal-day-pill, .modal-slot-pill {
+    background: #0b0e17; border: 1px solid #262b3a; color: #cfd3dc;
+    border-radius: 10px; padding: 9px 12px; font-size: .82rem;
+    cursor: pointer; transition: .15s;
+  }
+  .modal-day-pill:hover, .modal-slot-pill:hover { border-color: #DDAA55; }
+  .modal-day-pill.active, .modal-slot-pill.active {
+    background: #DDAA55; color: #090c1b; border-color: #DDAA55; font-weight: 700;
+  }
+
+  .slots-empty-hint { color: #6b7280; font-size: .82rem; text-align: left; }
+
+  .modal-confirm-btn {
+    width: 100%; background: #DDAA55; color: #090c1b; border: none;
+    border-radius: 10px; padding: 13px; font-weight: 700; font-size: .9rem;
+    cursor: pointer; margin-top: 22px; transition: .15s;
+  }
+  .modal-confirm-btn:hover:not(:disabled) { background: #e8bc72; }
+  .modal-confirm-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+  .modal-close-txt {
+    display: block; margin: 14px auto 0 auto; background: transparent;
+    border: none; color: #9aa3af; font-size: .85rem; cursor: pointer;
+  }
+  .modal-close-txt:hover { color: #f0f2f5; }
+
+  .modal-success { display: none; text-align: center; }
+  .modal-success .check-circle {
+    width: 56px; height: 56px; border-radius: 50%; background: rgba(127,216,160,.15);
+    color: #7fd8a0; border: 1px solid rgba(127,216,160,.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; margin: 0 auto 16px auto;
+  }
+  .modal-success h3 { font-size: 1.1rem; margin-bottom: 10px; }
+  .modal-success p { color: #9aa3af; font-size: .85rem; margin-bottom: 4px; }
+  .modal-success #successDetail { color: #f0f2f5; font-weight: 600; margin-bottom: 10px; }
+
+  /* ---------------- MODAL DE PERFIL ---------------- */
+  .profile-modal-box { position: relative; max-width: 380px; }
+  .modal-close {
+    position: absolute; top: 16px; right: 16px; background: transparent;
+    border: none; color: #9aa3af; cursor: pointer;
+  }
+  .modal-close:hover { color: #f0f2f5; }
+  .profile-modal-title { font-size: 1.1rem; margin-bottom: 18px; }
+  .profile-avatar-wrap { display: flex; justify-content: center; margin-bottom: 12px; }
+  .profile-avatar {
+    width: 64px; height: 64px; border-radius: 50%; background: #DDAA55;
+    color: #090c1b; display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 1.2rem;
+  }
+  .profile-name { font-weight: 700; font-size: 1.05rem; margin-bottom: 2px; }
+  .profile-role { color: #9aa3af; font-size: .82rem; margin-bottom: 18px; }
+  .profile-info-box {
+    background: #0b0e17; border: 1px solid #262b3a; border-radius: 12px;
+    padding: 16px; text-align: left; margin-bottom: 18px;
+  }
+  .profile-field-label {
+    font-size: .72rem; color: #6b7280; text-transform: uppercase;
+    letter-spacing: .04em; margin-top: 10px;
+  }
+  .profile-field-label:first-child { margin-top: 0; }
+  .profile-field-value { font-size: .9rem; color: #f0f2f5; margin-bottom: 4px; }
+  .profile-status-label { font-size: .72rem; color: #6b7280; text-transform: uppercase; margin-top: 10px; }
+  .profile-status { display: flex; align-items: center; gap: 6px; font-size: .85rem; color: #7fd8a0; font-weight: 600; }
+  .profile-status .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #7fd8a0; display: inline-block; }
+  .profile-actions { display: flex; gap: 10px; }
+  .profile-btn-primary, .profile-btn-secondary {
+    flex: 1; border-radius: 10px; padding: 11px; font-weight: 700; font-size: .85rem; cursor: pointer; border: none;
+  }
+  .profile-btn-primary { background: #DDAA55; color: #090c1b; }
+  .profile-btn-primary:hover { background: #e8bc72; }
+  .profile-btn-secondary { background: transparent; border: 1px solid #262b3a; color: #cfd3dc; }
+  .profile-btn-secondary:hover { border-color: #3a4155; color: #fff; }
+  .profile-label-center { font-size: .72rem; color: #6b7280; text-transform: uppercase; margin-bottom: 6px; }
+  .profile-input {
+    width: 100%; background: #0b0e17; border: 1px solid #262b3a; color: #f0f2f5;
+    border-radius: 8px; padding: 9px 10px; font-size: .88rem; margin-bottom: 4px;
+  }
+  .profile-input:focus { outline: none; border-color: #DDAA55; }
+  .profile-input-name { text-align: center; font-weight: 700; margin-bottom: 8px; }
+</style>
+</head>
+<body class="dashboard-body dark-mode">
+
+  <header class="dash-header">
+    <div class="dash-header-inner">
+      <div class="dash-logo-area">
+        <div class="header-brand-icon">
+          <svg viewBox="0 0 300 300" width="36" height="36">
+            <ellipse cx="150" cy="160" rx="140" ry="40" fill="none" stroke="rgba(221, 170, 85, 0.4)" stroke-width="3" transform="rotate(-15 150 160)" />
+            <polygon points="60,230 240,230 150,70" fill="#152E2E" />
+            <polygon points="80,230 220,230 150,90" fill="#2B625C" />
+            <path d="M 150 120 L 205 230 L 165 230 L 150 190 L 135 230 L 95 230 Z" fill="#DDAA55" />
+            <polygon points="150,25 155,40 172,40 158,50 163,65 150,55 137,65 142,50 128,40 145,40" fill="#DDAA55" />
+          </svg>
+        </div>
+        <span class="dash-logo-text">inspira</span>
+      </div>
+
+      <nav class="dash-nav">
+        <a href="dashboard.html">Início</a>
+        <a href="como-funciona.html">Como funciona</a>
+        <a href="encontre-um-mentor.html" class="active">Recursos</a>
+      </nav>
+
+      <div class="dash-header-right">
+        <div class="dash-user-profile" onclick="openUserProfileModal()" title="Ver Perfil">
+          <span class="user-name">Raquel Vitória de Souza</span>
+          <div class="user-avatar" id="headerUserAvatar">RV</div>
+        </div>
+
+        <button class="theme-toggle-dash" id="themeToggleBtn" title="Alternar Modo Escuro">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+
+        <button class="theme-toggle-dash" title="Sair da Conta">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+   <div class="page-container">
+    <span class="badge">REDE DE ESPECIALISTAS</span>
+    <h1>Encontre o mentor ideal para o seu próximo passo.</h1>
+    <p class="subtitle">Busque pelo nome, navegue pelas áreas e agende um papo direto ao ponto.</p>
+
+    <div class="search-wrap">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="text" id="searchInput" placeholder="Quem ou qual assunto você procura?">
+    </div>
+
+    <div class="filters" id="filters">
+      <button class="filter-pill active" data-filter="todos">Todos <span class="count">(6)</span></button>
+      <button class="filter-pill" data-filter="tecnologia">Tecnologia & Cloud <span class="count">(2)</span></button>
+      <button class="filter-pill" data-filter="financas">Finanças <span class="count">(1)</span></button>
+      <button class="filter-pill" data-filter="empreendedorismo">Empreendedorismo <span class="count">(2)</span></button>
+      <button class="filter-pill" data-filter="marketing">Marketing <span class="count">(1)</span></button>
+    </div>
+
+    <div class="sort-wrap">
+      <label for="sortSelect">Ordenar por</label>
+      <select class="sort-select" id="sortSelect">
+        <option value="relevantes">Mais relevantes</option>
+        <option value="avaliacao">Melhor avaliados</option>
+        <option value="mentorias">Mais concorridos</option>
+        <option value="nome">Alfabético (A-Z)</option>
+      </select>
+    </div>
+
+    <div class="grid" id="mentorGrid">
+      <div class="card" data-category="tecnologia" data-rating="4.9" data-mentorias="120" data-name="Camila Lopes" data-role="Head de engenharia, cloud" data-initials="CL">
+        <div class="card-header"><div class="avatar">CL</div><div><p class="card-name">Camila Lopes</p><p class="card-role">Head de Engenharia & Cloud</p></div></div>
+        <p class="card-desc">Foco em migração para nuvem sem dor de cabeça e liderança de equipes de tech.</p>
+        <div class="card-rating">★ <span>4.9 · 120 mentorias</span></div>
+        <div class="tags-row"><span class="free-tag">Gratuito</span><span class="availability"><span class="dot"></span>Disponível hoje, 14h</span></div>
+        <button class="card-btn">Agendar mentoria</button>
+      </div>
+
+      <div class="card" data-category="financas" data-rating="4.8" data-mentorias="86" data-name="Rafael Souza" data-role="CFO, finanças corporativas" data-initials="RS">
+        <div class="card-header"><div class="avatar">RS</div><div><p class="card-name">Rafael Souza</p><p class="card-role">CFO & Finanças Corporativas</p></div></div>
+        <p class="card-desc">Direto ao ponto sobre como estruturar uma carreira sólida no mundo financeiro.</p>
+        <div class="card-rating">★ <span>4.8 · 86 mentorias</span></div>
+        <div class="tags-row"><span class="free-tag">Gratuito</span><span class="availability"><span class="dot"></span>Próxima vaga amanhã</span></div>
+        <button class="card-btn">Agendar mentoria</button>
+      </div>
+
+      <div class="card featured" data-category="empreendedorismo" data-rating="5.0" data-mentorias="64" data-name="Juliana Martins" data-role="Fundadora, empreendedorismo" data-initials="JM">
+        <span class="featured-tag">Mais bem avaliada</span>
+        <div class="card-header"><div class="avatar">JM</div><div><p class="card-name">Juliana Martins</p><p class="card-role">Fundadora & Empreendedora</p></div></div>
+        <p class="card-desc">Apoio real para founders organizarem a casa e irem atrás do primeiro investimento.</p>
+        <div class="card-rating">★ <span>5.0 · 64 mentorias</span></div>
+        <div class="tags-row"><span class="free-tag">Gratuito</span><span class="availability"><span class="dot"></span>Disponível hoje, 10h</span></div>
+        <button class="card-btn">Agendar mentoria</button>
+      </div>
+
+      <div class="card" data-category="marketing" data-rating="4.7" data-mentorias="98" data-name="Pedro Teixeira" data-role="Diretor de marketing digital" data-initials="PT">
+        <div class="card-header"><div class="avatar">PT</div><div><p class="card-name">Pedro Teixeira</p><p class="card-role">Diretor de Marketing Digital</p></div></div>
+        <p class="card-desc">Crescimento acelerado, tráfego e posicionamento de marca na prática.</p>
+        <div class="card-rating">★ <span>4.7 · 98 mentorias</span></div>
+        <div class="tags-row"><span class="free-tag">Gratuito</span><span class="availability"><span class="dot"></span>Poucas vagas essa semana</span></div>
+        <button class="card-btn">Agendar mentoria</button>
+      </div>
+
+      <div class="card" data-category="tecnologia" data-rating="4.9" data-mentorias="73" data-name="Beatriz Santos" data-role="Arquiteta de dados, cloud" data-initials="BS">
+        <div class="card-header"><div class="avatar">BS</div><div><p class="card-name">Beatriz Santos</p><p class="card-role">Arquiteta de Dados & Cloud</p></div></div>
+        <p class="card-desc">Quer migrar para dados ou machine learning? Te ajudo a traçar o melhor caminho.</p>
+        <div class="card-rating">★ <span>4.9 · 73 mentorias</span></div>
+        <div class="tags-row"><span class="free-tag">Gratuito</span><span class="availability"><span class="dot"></span>Disponível hoje, 16h</span></div>
+        <button class="card-btn">Agendar mentoria</button>
+      </div>
+
+      <div class="card" data-category="empreendedorismo" data-rating="4.9" data-mentorias="51" data-name="Lucas Andrade" data-role="Investidor anjo, startups" data-initials="LA">
+        <div class="card-header"><div class="avatar">LA</div><div><p class="card-name">Lucas Andrade</p><p class="card-role">Investidor Anjo & Startups</p></div></div>
+        <p class="card-desc">Validar produto e preparar o terreno para falar com investidores.</p>
+        <div class="card-rating">★ <span>4.9 · 51 mentorias</span></div>
+        <div class="tags-row"><span class="free-tag">Gratuito</span><span class="availability"><span class="dot"></span>Próxima vaga sexta-feira</span></div>
+        <button class="card-btn">Agendar mentoria</button>
+      </div>
+    </div>
+
+    <p class="no-results" id="noResults">Ops, não achei nenhum mentor com esse nome ou tema por aqui.</p>
+   </div>
+  </main>
+
+  <!-- MODAL DE AGENDAMENTO -->
+  <div class="modal-overlay" id="scheduleModal">
+    <div class="modal-box">
+      <div id="modalScheduleView">
+        <div class="avatar" id="modalAvatar" style="background:#DDAA55;color:#090c1b;">CL</div>
+        <h3 id="modalName">Camila Lopes</h3>
+        <p id="modalRole">Head de Engenharia & Cloud</p>
+
+        <p class="modal-label">Selecione o dia</p>
+        <div class="modal-days" id="modalDays"></div>
+
+        <p class="modal-label">Horários livres</p>
+        <div class="modal-slots" id="modalSlots">
+          <span class="slots-empty-hint">Escolha um dia para ver os horários disponíveis.</span>
+        </div>
+
+        <button class="modal-confirm-btn" id="modalConfirmBtn" disabled>Confirmar agendamento</button>
+        <button class="modal-close-txt" id="modalCancelBtn">Cancelar</button>
+      </div>
+
+      <div class="modal-success" id="modalSuccessView">
+        <div class="check-circle">✓</div>
+        <h3>Tudo certo por aqui!</h3>
+        <p id="successDetail">Com Camila Lopes — Seg, 15 Set às 14:00</p>
+        <p>Enviamos os detalhes e o link para o seu e-mail.</p>
+        <button class="modal-confirm-btn" id="modalDoneBtn" style="margin-top:20px;">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PERFIL DO USUÁRIO -->
+  <div class="modal-overlay" id="userProfileModal">
+    <div class="modal-box profile-modal-box">
+      <button class="modal-close" id="profileModalClose" aria-label="Fechar">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+
+      <h2 class="profile-modal-title">Seu Perfil</h2>
+
+      <div id="profileViewMode">
+        <div class="profile-avatar-wrap">
+          <div class="profile-avatar" id="profileAvatarView">RV</div>
+        </div>
+        <p class="profile-name" id="profileNameView">Raquel Vitória de Souza</p>
+        <p class="profile-role">Estudante & Mentorada</p>
+
+        <div class="profile-info-box">
+          <p class="profile-field-label">E-MAIL:</p>
+          <p class="profile-field-value" id="profileEmailView">raquel.vitoria@exemplo.com</p>
+
+          <p class="profile-field-label">CURSO</p>
+          <p class="profile-field-value" id="profileCourseView">Análise e Desenvolvimento de Sistemas</p>
+
+          <p class="profile-status-label">STATUS DA CONTA:</p>
+          <p class="profile-status"><span class="status-dot"></span>Ativa</p>
+        </div>
+
+        <div class="profile-actions">
+          <button class="profile-btn-primary" id="editProfileBtn">Editar Perfil</button>
+          <button class="profile-btn-secondary" id="logoutBtn">Sair</button>
+        </div>
+      </div>
+
+      <div id="profileEditMode" style="display: none;">
+        <div class="profile-avatar-wrap">
+          <div class="profile-avatar" id="profileAvatarEdit">RV</div>
+        </div>
+
+        <p class="profile-label-center">NOME COMPLETO</p>
+        <input type="text" class="profile-input profile-input-name" id="profileNameInput" value="Raquel Vitória de Souza">
+        <p class="profile-role">Estudante & Mentorada</p>
+
+        <div class="profile-info-box">
+          <p class="profile-field-label">E-MAIL</p>
+          <input type="email" class="profile-input" id="profileEmailInput" value="raquel.vitoria@exemplo.com">
+
+          <p class="profile-field-label">CURSO</p>
+          <input type="text" class="profile-input" id="profileCourseInput" value="Análise e Desenvolvimento de Sistemas">
+
+          <p class="profile-status-label">STATUS DA CONTA:</p>
+          <p class="profile-status"><span class="status-dot"></span>Ativa</p>
+        </div>
+
+        <div class="profile-actions">
+          <button class="profile-btn-primary" id="saveProfileBtn">Salvar Alterações</button>
+          <button class="profile-btn-secondary" id="cancelProfileBtn">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WIDGET DE CHAT FLUTUANTE DE CANTO DE TELA COM CÂMERA -->
+  <button id="chatWidgetToggle" class="iw-fab" onclick="toggleChatWidget()" title="Falar com o Assistente Inspira" aria-label="Abrir chat">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="#090c1b">
+      <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+    </svg>
+  </button>
+
+  <div id="iwPanel" class="iw-panel" style="display: none;">
+    <div class="iw-header">
+      <div>
+        <p class="iw-title">Inspira AI</p>
+        <p class="iw-status"><span class="iw-status-dot"></span>Online agora</p>
+      </div>
+      <button class="iw-close-btn" onclick="toggleChatWidget()" aria-label="Fechar chat">&times;</button>
+    </div>
+
+    <div class="iw-chat-view" id="iwChatView">
+      <div class="iw-body" id="iwBody">
+        <div class="chat-bubble bot">Oi, Raquel! Quer uma mãozinha para achar o mentor ideal ou marcar um papo rápido? Me diz qual área você procura (tecnologia, finanças, empreendedorismo ou marketing).</div>
+      </div>
+
+      <!-- ÁREA DA CÂMERA DE VÍDEO DA WEBCAM -->
+      <div id="chatVideoArea" class="chat-video-area" style="display: none; padding: 12px 16px; border-top: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.4);">
+        <video id="chatVideoPreview" autoplay muted playsinline style="width: 100%; border-radius: 10px; background: #000; max-height: 160px; object-fit: cover;"></video>
+        <button id="chatVideoEnd" onclick="endVideoCall()" style="margin-top: 8px; width: 100%; background: #ef4444; color: #fff; border: none; padding: 8px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer;">Encerrar chamada</button>
+      </div>
+
+      <!-- BARRA DE INPUT COM CÂMERA DOURADA -->
+      <div class="iw-input-row" style="margin: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid #262b3a; border-radius: 28px; padding: 6px 6px 6px 14px; display: flex; align-items: center; gap: 10px;">
+        <button id="chatVideoBtn" onclick="toggleVideoCall()" title="Iniciar Chamada de Vídeo" style="background: transparent; border: none; color: #DDAA55; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; flex-shrink: 0;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#DDAA55" stroke-width="2">
+            <path d="M23 7l-7 5 7 5V7z"></path>
+            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+          </svg>
+        </button>
+        <input type="text" id="iwInput" placeholder="Digite sua mensagem..." onkeydown="iwHandleInputKey(event)" style="flex: 1; background: transparent; border: none; outline: none; color: #fff; font-size: 13px;">
+        <button class="iw-send-btn" onclick="iwSendFromInput()" aria-label="Enviar mensagem">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#090c1b">
+            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/mentores.js"></script>
+</body>
+</html>

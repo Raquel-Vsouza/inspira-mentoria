@@ -1,76 +1,107 @@
+<<<<<<< Updated upstream
 /* Cores padrão para o Modo Claro (Light Mode) */
 body.dashboard-body {
   background-color: var(--cream, #faf6ee) !important;
   color: var(--ink, #1c1c22);
   overflow-y: auto !important;
+=======
+/* ==========================================
+   ESTILOS GLOBAIS E DO DASHBOARD (Inspira)
+   Este arquivo consome as variáveis de tema
+   definidas em style.css (--cream, --ink, --muted,
+   --field-bg, --field-border), que já trocam de
+   valor automaticamente com a classe body.dark-mode.
+   Isso garante que o dashboard responda ao mesmo
+   alternador de tema usado no restante do site.
+   ========================================== */
+
+* {
+  box-sizing: border-box;
+>>>>>>> Stashed changes
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/* ---- Variáveis auxiliares exclusivas do dashboard ----
+   (overlays sutis e o tom do header, que precisam
+   inverter de "branco translúcido" para "preto
+   translúcido" dependendo do tema) */
+:root {
+  --dash-overlay-soft: rgba(0, 0, 0, 0.035);
+  --dash-overlay-med: rgba(0, 0, 0, 0.06);
+  --dash-overlay-strong: rgba(0, 0, 0, 0.12);
+  --dash-header-bg: #ffffff;
+  --dash-dot-bg: rgba(0, 0, 0, 0.15);
+}
+
+body.dark-mode {
+  --dash-overlay-soft: rgba(255, 255, 255, 0.04);
+  --dash-overlay-med: rgba(255, 255, 255, 0.06);
+  --dash-overlay-strong: rgba(255, 255, 255, 0.15);
+  --dash-header-bg: #0e1329;
+  --dash-dot-bg: rgba(255, 255, 255, 0.15);
+}
+
+body.dashboard-body {
+  background-color: var(--cream);
+  color: var(--ink);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Cores para o Modo Escuro (Dark Mode) */
-body.dashboard-body.dark-mode {
-  background-color: #090c1b !important;
-  color: #f0f2f5;
-}
-
+/* BARRA DE NAVEGAÇÃO SUPERIOR */
 .dash-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 40px;
-  background: var(--field-bg, rgba(9, 12, 27, 0.95));
-  border-bottom: 1px solid var(--field-border, #1e2642);
+  padding: 16px 32px;
+  background-color: var(--dash-header-bg);
+  border-bottom: 1px solid var(--field-border);
   position: sticky;
   top: 0;
   z-index: 100;
-  width: 100%;
-  box-sizing: border-box;
-  gap: 20px;
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .dash-logo-area {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
 
 .header-brand-icon {
-  width: 56px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
 }
 
 .dash-logo-text {
-  color: #E0B84A;
-  font-size: 28px;
-  font-family: Georgia, serif;
-  letter-spacing: 2px;
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: -0.5px;
+  color: var(--ink);
 }
 
 .dash-nav {
   display: flex;
-  gap: 30px;
-  align-items: center;
+  gap: 28px;
 }
 
 .dash-nav a {
-  color: var(--muted, #949ab0);
   text-decoration: none;
+  color: var(--muted);
   font-size: 14px;
+  font-weight: 500;
   transition: color 0.2s;
 }
 
-.dash-nav a:hover, .dash-nav a.active {
+.dash-nav a:hover,
+.dash-nav a.active {
   color: #E0B84A;
 }
 
-/* Container do perfil do usuário */
 .dash-header-right {
   display: flex;
   align-items: center;
@@ -78,365 +109,342 @@ body.dashboard-body.dark-mode {
 }
 
 .dash-user-profile {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  gap: 10px !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  background: var(--dash-overlay-soft);
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--field-border);
+  transition: background 0.2s;
+}
+
+.dash-user-profile:hover {
+  background: var(--dash-overlay-med);
 }
 
 .user-name {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--ink);
-  white-space: nowrap;
-}
-
-body.dashboard-body.dark-mode .user-name {
-  color: #fff;
 }
 
 .user-avatar {
-  width: 38px;
-  height: 38px;
-  min-width: 38px;
-  background: #E0B84A;
-  color: #0c0f2e;
+  width: 32px;
+  height: 32px;
+  background: #2B625C;
+  color: #fff;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 12px;
   font-weight: bold;
-  font-size: 13px;
 }
 
-/* Botão de tema unificado no header */
 .theme-toggle-dash {
-  background: var(--field-bg, #11152a);
-  border: 1px solid var(--field-border, #1e2642);
-  color: var(--ink, #f0f2f5);
-  width: 40px;
-  height: 40px;
-  min-width: 40px;
+  background: var(--dash-overlay-soft);
+  border: 1px solid var(--field-border);
+  color: var(--muted);
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.3s ease;
-}
-
-body.dashboard-body.dark-mode .theme-toggle-dash {
-  background: #11152a;
-  color: #f0f2f5;
-  border-color: #1e2642;
+  transition: 0.2s;
 }
 
 .theme-toggle-dash:hover {
-  transform: scale(1.05);
-  border-color: #E0B84A;
+  color: #E0B84A;
+  background: var(--dash-overlay-med);
 }
 
+/* CONTEÚDO PRINCIPAL */
 .dashboard-main {
+  flex: 1;
   max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 32px 20px;
 }
 
+/* HERO BANNER (mesma superfície dos cards) */
 .dash-hero-banner {
-  background: linear-gradient(135deg, var(--field-bg, #11152a) 0%, var(--cream, #090c1b) 100%);
-  border: 1px solid var(--field-border, #1e2642);
+  background-color: var(--field-bg);
+  border: 1px solid var(--field-border);
   border-radius: 16px;
-  padding: 50px;
-  margin-bottom: 30px;
-  transition: background 0.3s ease, border-color 0.3s ease;
+  padding: 40px;
+  margin-bottom: 32px;
+  transition: background-color 0.3s ease, border-color 0.2s;
+}
+
+.dash-hero-banner:hover {
+  border-color: rgba(224, 184, 74, 0.3);
+}
+
+.dash-hero-content {
+  max-width: 650px;
 }
 
 .tag-transform {
-  color: #E0B84A;
-  font-size: 12px;
+  display: inline-block;
+  font-size: 11px;
   font-weight: bold;
-  letter-spacing: 1px;
+  color: #E0B84A;
+  background: rgba(224, 184, 74, 0.12);
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+  letter-spacing: 0.5px;
 }
 
 .dash-hero-banner h1 {
-  font-family: Georgia, serif;
-  font-size: 36px;
-  margin: 10px 0 15px;
+  font-size: 32px;
+  font-weight: 800;
   color: var(--ink);
-}
-
-body.dashboard-body.dark-mode .dash-hero-banner h1 {
-  color: #fff;
+  margin-bottom: 12px;
+  line-height: 1.2;
 }
 
 .dash-hero-banner p {
-  color: var(--muted, #949ab0);
-  font-size: 16px;
-  margin-bottom: 25px;
+  font-size: 15px;
+  color: var(--muted);
+  margin-bottom: 24px;
 }
 
 .dash-actions {
   display: flex;
-  gap: 15px;
-  align-items: center;
+  gap: 12px;
+}
+
+/* BOTÕES GLOBAIS */
+.btn-primary {
+  background-color: #E0B84A;
+  color: #090c1b;
+  border: none;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #cca43d;
 }
 
 .btn-outline {
   background: transparent;
-  border: 1px solid #E0B84A;
-  color: #E0B84A;
-  padding: 12px 24px;
+  color: var(--ink);
+  border: 1px solid var(--field-border);
+  font-weight: 500;
+  padding: 10px 20px;
   border-radius: 8px;
-  font-weight: 700;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: 0.2s;
 }
 
 .btn-outline:hover {
-  background: rgba(224, 184, 74, 0.1);
+  background: var(--dash-overlay-soft);
 }
 
+/* GRID DE CARDS PRINCIPAIS */
 .dash-grid-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 24px;
   margin-bottom: 40px;
 }
 
 .dash-card {
-  background: var(--field-bg, #11152a);
-  border: 1px solid var(--field-border, #1e2642);
+  background-color: var(--field-bg);
+  border: 1px solid var(--field-border);
   border-radius: 16px;
   padding: 24px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  transition: transform 0.2s, border-color 0.2s, background-color 0.3s ease;
+  position: relative;
+  transition: background-color 0.3s ease, transform 0.2s, border-color 0.2s;
 }
 
 .dash-card:hover {
-  border-color: #E0B84A;
-  transform: translateY(-3px);
+  border-color: rgba(224, 184, 74, 0.3);
+  transform: translateY(-2px);
 }
 
 .dash-card h3 {
-  margin: 0 0 10px;
   font-size: 18px;
+  font-weight: 700;
   color: var(--ink);
-}
-
-body.dashboard-body.dark-mode .dash-card h3 {
-  color: #fff;
+  margin-bottom: 8px;
 }
 
 .card-desc {
-  font-size: 14px;
-  color: var(--muted, #949ab0);
+  font-size: 13px;
+  color: var(--muted);
   margin-bottom: 20px;
   line-height: 1.4;
 }
 
-.card-header-badge {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.badge-novo {
-  background: rgba(224, 184, 74, 0.2);
-  color: #E0B84A;
-  font-size: 10px;
-  font-weight: bold;
-  padding: 4px 8px;
-  border-radius: 6px;
-}
-
-.ai-box-interactive {
-  display: flex;
-  background: var(--cream, #090c1b);
-  border: 1px solid var(--field-border, #1e2642);
-  border-radius: 8px;
-  overflow: hidden;
-  margin-top: 10px;
-  transition: background-color 0.3s ease;
-}
-
-.ai-input {
-  flex: 1;
-  background: transparent;
-  border: none;
-  padding: 12px 14px;
-  color: var(--ink);
-  font-size: 13px;
-  outline: none;
-}
-
-body.dashboard-body.dark-mode .ai-input {
-  color: #fff;
-}
-
-.ai-send-btn {
-  background: #E0B84A;
-  border: none;
-  color: #0c0f2e;
-  padding: 0 16px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.btn-secondary-dash {
-  background: transparent;
-  border: none;
-  color: #E0B84A;
-  font-weight: 600;
-  text-align: left;
-  padding: 0;
-  cursor: pointer;
-  font-size: 14px;
-  margin-top: 15px;
-}
-
-.btn-secondary-dash:hover {
-  text-decoration: underline;
-}
-
 .card-list-info {
   list-style: none;
-  padding: 0;
-  margin: 0 0 20px;
-  font-size: 13px;
-  color: var(--muted, #949ab0);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-grow: 1;
 }
 
 .card-list-info li {
-  margin-bottom: 6px;
+  font-size: 13px;
+  color: var(--ink);
 }
 
-.event-box {
-  background: var(--cream, #090c1b);
-  padding: 12px;
+.btn-secondary-dash {
+  background: rgba(224, 184, 74, 0.1);
+  color: #E0B84A;
+  border: 1px solid rgba(224, 184, 74, 0.2);
+  padding: 10px 16px;
   border-radius: 8px;
-  border-left: 3px solid #E0B84A;
+  font-weight: 600;
   font-size: 13px;
-  margin-bottom: 15px;
-  transition: background-color 0.3s ease;
+  cursor: pointer;
+  text-align: left;
+  transition: 0.2s;
+  margin-top: auto;
+}
+
+.btn-secondary-dash:hover {
+  background: rgba(224, 184, 74, 0.2);
+}
+
+/* CARD DE CALENDÁRIO */
+.calendar-preview {
+  background: var(--dash-overlay-soft);
+  border: 1px solid var(--field-border);
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.event-box strong {
+  font-size: 12px;
+  color: #E0B84A;
+  display: block;
+  margin-bottom: 2px;
 }
 
 .event-box p {
-  margin: 4px 0 0;
-  color: var(--muted, #949ab0);
+  font-size: 12px;
+  color: var(--ink);
 }
 
+/* CARD DE EVOLUÇÃO */
 .evolution-progress-wrap {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 15px 0;
+  margin: 10px 0 20px 0;
 }
 
 .progress-circle {
   width: 70px;
   height: 70px;
-  border: 4px solid var(--field-border, #1e2642);
-  border-top-color: #E0B84A;
   border-radius: 50%;
+  border: 4px solid var(--field-border);
+  border-top-color: #E0B84A;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
   font-size: 16px;
-  color: var(--ink);
-}
-
-body.dashboard-body.dark-mode .progress-circle {
-  color: #fff;
+  font-weight: bold;
+  color: #E0B84A;
+  background: rgba(224, 184, 74, 0.05);
 }
 
 .evolution-steps {
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .dot {
   width: 8px;
   height: 8px;
-  background: var(--field-border, #1e2642);
   border-radius: 50%;
+  background-color: var(--dash-dot-bg);
 }
 
 .dot.active {
-  background: #E0B84A;
+  background-color: #E0B84A;
 }
 
+/* MENTORES EM DESTAQUE */
 .mentors-section {
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 .section-title-wrap {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .section-title-wrap h2 {
-  font-family: Georgia, serif;
-  font-size: 24px;
+  font-size: 20px;
+  font-weight: 700;
   color: var(--ink);
-  margin: 0;
-}
-
-body.dashboard-body.dark-mode .section-title-wrap h2 {
-  color: #fff;
 }
 
 .link-see-all {
+  font-size: 13px;
   color: #E0B84A;
   text-decoration: none;
-  font-size: 14px;
+  font-weight: 600;
 }
 
 .mentors-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 20px;
 }
 
 .mentor-card {
-  background: var(--field-bg, #11152a);
-  border: 1px solid var(--field-border, #1e2642);
+  background-color: var(--field-bg);
+  border: 1px solid var(--field-border);
   border-radius: 12px;
-  padding: 20px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  gap: 14px;
+  transition: background-color 0.3s ease, border-color 0.2s;
 }
 
-.mentor-card h4 {
-  margin: 0 0 4px;
+.mentor-info h4 {
+  font-size: 15px;
   color: var(--ink);
-  font-size: 16px;
-}
-
-body.dashboard-body.dark-mode .mentor-card h4 {
-  color: #fff;
+  margin-bottom: 2px;
 }
 
 .mentor-role {
-  font-size: 13px;
-  color: var(--muted, #949ab0);
-  margin: 0 0 10px;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 8px;
 }
 
 .mentor-tag {
-  background: rgba(224, 184, 74, 0.1);
-  color: #E0B84A;
-  font-size: 11px;
-  padding: 3px 8px;
-  border-radius: 4px;
+  font-size: 10px;
+  background: rgba(43, 98, 92, 0.2);
+  color: #4ade80;
+  padding: 2px 8px;
+  border-radius: 10px;
   display: inline-block;
 }
 
@@ -444,12 +452,17 @@ body.dashboard-body.dark-mode .mentor-card h4 {
   display: flex;
   justify-content: space-between;
   font-size: 12px;
-  color: var(--muted, #949ab0);
-  margin-top: 20px;
-  border-top: 1px solid var(--field-border, #1e2642);
-  padding-top: 12px;
+  color: var(--muted);
+  border-top: 1px solid var(--field-border);
+  padding-top: 10px;
 }
 
+<<<<<<< Updated upstream
+=======
+/* ==========================================
+   ESTILOS DE MODAIS GERAIS
+   ========================================== */
+>>>>>>> Stashed changes
 
 .modal-overlay {
   position: fixed;
@@ -457,182 +470,369 @@ body.dashboard-body.dark-mode .mentor-card h4 {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(9, 12, 27, 0.85);
-  backdrop-filter: blur(5px);
+  background: rgba(5, 7, 18, 0.8);
+  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
+  z-index: 1000;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: 0.2s ease-in-out;
 }
 
 .modal-overlay.active {
-  opacity: 1 !important;
-  visibility: visible !important;
+  opacity: 1;
+  visibility: visible;
 }
 
 .modal-content {
-  background: #11152a;
-  border: 1px solid #1e2642;
+  background-color: var(--field-bg);
+  border: 1px solid var(--field-border);
   border-radius: 16px;
   width: 100%;
   max-width: 500px;
-  padding: 30px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-  box-sizing: border-box;
+  padding: 24px;
+  color: var(--ink);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+  transform: scale(0.95);
+  transition: transform 0.2s ease-in-out, background-color 0.3s ease, color 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+  transform: scale(1);
 }
 
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  border-bottom: 1px solid #1e2642;
-  padding-bottom: 15px;
+  margin-bottom: 16px;
 }
 
 .modal-header h3 {
-  margin: 0;
-  font-family: Georgia, serif;
-  color: #fff;
-  font-size: 20px;
+  font-size: 18px;
+  font-weight: 700;
 }
 
 .close-modal-btn {
   background: transparent;
   border: none;
-  color: #949ab0;
-  font-size: 24px;
+  color: var(--muted);
+  font-size: 20px;
   cursor: pointer;
-  transition: color 0.2s;
+  padding: 4px;
 }
 
 .close-modal-btn:hover {
-  color: #E0B84A;
+  color: var(--ink);
 }
 
 .modal-subtitle {
-  color: #949ab0;
-  font-size: 14px;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+/* MODAL DE PERFIL */
+.profile-modal-card {
+  max-width: 420px;
+  text-align: center;
+}
+
+.profile-avatar-large {
+  width: 70px;
+  height: 70px;
+  background: #2B625C;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 0 auto 12px auto;
+}
+
+.profile-user-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+
+.profile-user-role {
+  font-size: 12px;
+  color: #E0B84A;
   margin-bottom: 20px;
 }
 
-.field-modal {
+.profile-info-list {
+  background: var(--dash-overlay-soft);
+  border: 1px solid var(--field-border);
+  border-radius: 12px;
+  padding: 14px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   margin-bottom: 20px;
+}
+
+.info-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  font-size: 13px;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.badge-active {
+  color: #4ade80;
+  font-size: 12px;
+}
+
+.profile-actions-row {
+  display: flex;
+  gap: 10px;
+}
+
+.profile-actions-row button {
+  flex: 1;
+}
+
+/* Modo de Edição de Perfil */
+.edit-only-item {
+  display: none;
+}
+
+body.is-editing-profile .view-only {
+  display: none !important;
+}
+
+body.is-editing-profile .edit-only-item {
+  display: flex !important;
+}
+
+.profile-edit-input {
+  background: var(--dash-overlay-soft);
+  border: 1px solid var(--field-border);
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: var(--ink);
+  font-size: 13px;
+  width: 100%;
+}
+
+.profile-edit-input:focus {
+  outline: none;
+  border-color: #E0B84A;
+}
+
+/* MODAL DE CALENDÁRIO */
+.field-modal {
+  margin-bottom: 16px;
 }
 
 .field-modal label {
+  font-size: 12px;
+  color: var(--muted);
   display: block;
-  font-size: 13px;
-  font-weight: 600;
-  color: #fff;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .modal-select {
   width: 100%;
-  padding: 12px;
-  background: #090c1b;
-  border: 1px solid #1e2642;
-  color: #fff;
+  background: var(--field-bg);
+  border: 1px solid var(--field-border);
+  color: var(--ink);
+  padding: 10px;
   border-radius: 8px;
-  font-size: 14px;
-  outline: none;
+  font-size: 13px;
 }
 
 .slots-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 8px;
 }
 
 .time-slot {
-  background: #090c1b;
-  border: 1px solid #1e2642;
-  color: #949ab0;
+  background: var(--dash-overlay-soft);
+  border: 1px solid var(--field-border);
+  color: var(--ink);
   padding: 10px;
   border-radius: 8px;
+  font-size: 12px;
   cursor: pointer;
-  font-size: 13px;
-  transition: all 0.2s ease;
+  transition: 0.2s;
+  text-align: center;
 }
 
-.time-slot:hover, .time-slot.active-slot {
+.time-slot:hover {
+  background: var(--dash-overlay-med);
+}
+
+.time-slot.active-slot {
+  background: rgba(224, 184, 74, 0.15);
   border-color: #E0B84A;
   color: #E0B84A;
-  background: rgba(224, 184, 74, 0.05);
+  font-weight: 600;
 }
 
-/* =========================================
-   MEDIA QUERIES PARA RESPONSIVIDADE
-   ========================================= */
-
-/* Tablets e telas médias (até 992px) */
-@media (max-width: 992px) {
-  .dash-header {
-    padding: 15px 20px;
-  }
-  
-  .dash-nav {
-    display: none; /* Esconde o menu principal em telas menores (ideal para implementar menu hambúrguer futuramente) */
-  }
-
-  .dash-hero-banner {
-    padding: 30px 20px;
-  }
-
-  .dash-hero-banner h1 {
-    font-size: 28px;
-  }
+/* ==========================================
+   ESTILOS DO TESTE VOCACIONAL (Cor em Branco)
+   ========================================== */
+.tv-choice-eyebrow {
+  color: var(--ink) !important;
 }
 
+/* ==========================================
+   ESTILOS DO PLANO DE EVOLUÇÃO DINÂMICO
+   ========================================== */
 
+.evolution-modal-content {
+  max-width: 560px;
+}
+
+.evolution-top-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.evolution-summary-box {
+  background: rgba(224, 184, 74, 0.08);
+  border: 1px solid rgba(224, 184, 74, 0.2);
+  border-radius: 12px;
+  padding: 16px;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.evolution-summary-eyebrow {
+  font-size: 12px;
+  color: #E0B84A;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.evolution-summary-title {
+  margin: 4px 0 0 0;
+  font-size: 16px;
+  color: var(--ink);
+}
+
+.evolution-percentage-badge {
+  font-size: 24px;
+  font-weight: bold;
+  color: #E0B84A;
+  background: rgba(224, 184, 74, 0.15);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.evolution-reset-btn {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+  padding: 14px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition: 0.2s;
+}
+
+.evolution-reset-btn:hover {
+  background: rgba(239, 68, 68, 0.25);
+}
+
+.evolution-reset-icon {
+  font-size: 16px;
+}
+
+.evolution-steps-heading {
+  font-size: 15px;
+  margin-bottom: 4px;
+  color: var(--ink);
+}
+
+.evolution-steps-sub {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.evolution-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.evolution-step-card {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+
+.evolution-step-card:hover {
+  background: var(--dash-overlay-med) !important;
+}
+
+.evolution-close-action {
+  width: 100%;
+  margin-top: 24px;
+}
+
+/* RESPONSIVIDADE */
 @media (max-width: 768px) {
-  .dashboard-main {
-    padding: 20px 15px;
+  .dash-nav {
+    display: none;
   }
-
-  .dash-header-right {
-    gap: 10px;
+  .dash-header {
+    padding: 16px 20px;
   }
-
-  .user-name {
-    display: none !important; /* Oculta o nome e exibe apenas o avatar para economizar espaço */
+  .dash-hero-banner {
+    padding: 24px;
   }
-
-  .dash-actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .dash-actions button {
-    width: 100% !important;
-  }
-
-  .slots-grid {
-    grid-template-columns: 1fr; /* Alinha os horários do modal em coluna única */
-  }
-
-  .modal-content {
-    padding: 20px;
-    margin: 0 15px;
-    max-height: 85vh;
-    overflow-y: auto;
-  }
-}
-
-@media (max-width: 480px) {
-  .dash-logo-text {
-    display: none; /* Oculta o texto do logo se necessário, mantendo apenas o ícone */
-  }
-
   .dash-hero-banner h1 {
     font-size: 24px;
   }
+<<<<<<< Updated upstream
 
   .dash-card {
     padding: 18px;
   }
 }
+=======
+}
+>>>>>>> Stashed changes
