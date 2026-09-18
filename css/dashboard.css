@@ -1,32 +1,10 @@
-<<<<<<< Updated upstream
-/* Cores padrão para o Modo Claro (Light Mode) */
-body.dashboard-body {
-  background-color: var(--cream, #faf6ee) !important;
-  color: var(--ink, #1c1c22);
-  overflow-y: auto !important;
-=======
-/* ==========================================
-   ESTILOS GLOBAIS E DO DASHBOARD (Inspira)
-   Este arquivo consome as variáveis de tema
-   definidas em style.css (--cream, --ink, --muted,
-   --field-bg, --field-border), que já trocam de
-   valor automaticamente com a classe body.dark-mode.
-   Isso garante que o dashboard responda ao mesmo
-   alternador de tema usado no restante do site.
-   ========================================== */
-
 * {
   box-sizing: border-box;
->>>>>>> Stashed changes
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
-/* ---- Variáveis auxiliares exclusivas do dashboard ----
-   (overlays sutis e o tom do header, que precisam
-   inverter de "branco translúcido" para "preto
-   translúcido" dependendo do tema) */
 :root {
   --dash-overlay-soft: rgba(0, 0, 0, 0.035);
   --dash-overlay-med: rgba(0, 0, 0, 0.06);
@@ -44,11 +22,12 @@ body.dark-mode {
 }
 
 body.dashboard-body {
-  background-color: var(--cream);
-  color: var(--ink);
+  background-color: var(--cream, #faf6ee) !important;
+  color: var(--ink, #1c1c22);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-y: auto !important;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -457,12 +436,9 @@ body.dashboard-body {
   padding-top: 10px;
 }
 
-<<<<<<< Updated upstream
-=======
 /* ==========================================
    ESTILOS DE MODAIS GERAIS
    ========================================== */
->>>>>>> Stashed changes
 
 .modal-overlay {
   position: fixed;
@@ -827,12 +803,4 @@ body.is-editing-profile .edit-only-item {
   .dash-hero-banner h1 {
     font-size: 24px;
   }
-<<<<<<< Updated upstream
-
-  .dash-card {
-    padding: 18px;
-  }
 }
-=======
-}
->>>>>>> Stashed changes
